@@ -1,0 +1,24 @@
+#comment-1 {
+  border: 1px solid;
+  border-radius: 12%;
+  padding: 10px;
+  border-style: ridge;
+  background-color: beige;
+  margin-bottom: 1%;
+
+
+}
+
+#comment-2 {
+  font-size: 14px;
+  font-style: initial;
+  font-family: initial;
+  border-bottom: 1px solid;
+  color: brown;
+}
+
+#comment-3 {
+  font-size: 15px;
+  font-family: auto;
+  margin-bottom: 1%;
+}

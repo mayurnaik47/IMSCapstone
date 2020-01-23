@@ -1,0 +1,53 @@
+.example-margin {
+  margin: 10px;
+}
+
+::ng-deep .mat-badge-content{
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.form-feedback {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-field{
+  width: 100%;
+}
+
+#comment-1 {
+  border: 1px solid;
+  border-radius: 12%;
+  padding: 10px;
+  border-style: ridge;
+  background-color: beige;
+  margin-bottom: 1%;
+
+
+}
+
+#comment-2 {
+  font-size: 14px;
+  font-style: initial;
+  font-family: initial;
+  border-bottom: 1px solid;
+  color: brown;
+}
+
+#comment-3 {
+  font-size: 15px;
+  font-family: auto;
+  margin-bottom: 1%;
+}
+
+.alert-custom {
+  position: absolute;
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  margin-left: 4%;
+  z-index: 1;
+}
+

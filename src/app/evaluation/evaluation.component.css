@@ -1,0 +1,10 @@
+
+table {
+  width: 100%;
+}
+
+::ng-deep .mat-button{
+color: white;
+  background-color: blue;
+}
+
