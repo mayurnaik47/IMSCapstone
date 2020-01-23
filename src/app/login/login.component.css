@@ -1,0 +1,29 @@
+.stle{
+  font-family: cursive;
+  font-style: italic;
+  font-size: 35px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px #000000
+}
+
+
+.bgimg {
+  position: fixed;
+  background: url(../../assets/images/innovation1.jpg) no-repeat center;
+  padding-top: 100px;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+.error-form {
+
+  color: red;
+  text-align: left;
+  font-style: italic;
+  font-size: small;
+  font-weight: bold;
+
+}

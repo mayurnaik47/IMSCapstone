@@ -1,0 +1,100 @@
+
+
+
+<div class="container">
+   <div class="form form-insert" >
+     <div class="form-group form-row">
+       <label for="ideatitle" class="col-sm-2 col-form-label">Title: </label>
+       <div class="col-sm-10">
+         <input type="text" class="form-control" id="ideatitle" [(ngModel)]="newIdea.title"  placeholder="Idea Title">
+         <div class="error-form" *ngIf="isTitle">*Title is Required</div>
+       </div>
+     </div>
+
+     <div class="form-group form-row">
+       <label for="description" class="col-sm-2 col-form-label">Description: </label>
+       <div class="col-sm-10">
+         <textarea name="descrip" class="form-control" id="description" [(ngModel)]="newIdea.description" placeholder="Idea Description" ></textarea>
+         <div class="error-form" *ngIf="isDesc">*Description is required</div>
+       </div>
+     </div>
+
+     <div class="form-group form-row">
+       <label for="esttime" class="col-sm-2 col-form-label">Estimated Time: </label>
+       <div class="col-sm-2">
+         <input type="text" class="form-control" id="esttime" [(ngModel)]="newIdea.estTime" placeholder="MM/DD/YYYY" >
+         <div class="error-form" *ngIf="isEsttime">*Please enter estimated time</div>
+       </div>
+     </div>
+
+     <div class="form-group form-row">
+       <label for="cost" class="col-sm-2 col-form-label">Estimated cost: </label>
+       <div class="col-sm-2">
+         <input type="text" class="form-control" id="cost" [(ngModel)]="newIdea.cost" placeholder="e.g. 1000$">
+       </div>
+     </div>
+
+     <div class="form-group form-row">
+       <label for="type" class="col-sm-2 col-form-label">Idea Type: </label>
+       <div class="col-sm-4">
+       <select class="form-control" id="type" [(ngModel)]="newIdea.typeID" >
+         <option [value]="-1" [defaultSelected]="true" >Select</option>
+         <option [value]="ideaName.typeID" *ngFor="let ideaName of ideaTypes">{{ideaName.name}}</option>
+       </select>
+         <div class="error-form" *ngIf="isType">*Idea type is required</div>
+       </div>
+     </div>
+
+
+     <div class="form-group form-row" style="margin-top: 35px">
+       <div class="col-sm-10">
+       <label for="uploadproposal">Upload detailed proposal: </label>
+       <input type="file" class="form-control-file" id="uploadproposal" [(ngModel)]="newIdea.docName">
+       </div>
+       <button type="submit" (click)="addNewIdea()"  data-toggle='modal' data-target="#insertIdea" class="btn btn-primary col-sm-2" style="max-width: 100px;max-height: 50px">Submit</button>
+     </div>
+
+
+
+   </div>
+
+
+ </div>
+
+
+
+<!-- Modal For Insert Confirmation-->
+<div  class="modal fade" id="insertIdea" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exameModalLabel">Idea Inserted Successfully</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+
+
+          <div class="row">
+
+            <h4>Idea Inserted Successfully</h4>
+            <h5>Please note down the Idea ID: {{this.maxId.maxId}} </h5>
+
+          </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<!--            <button type="button" [attr.data-dismiss]=null  class="btn btn-primary">Update</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
