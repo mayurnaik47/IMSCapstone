@@ -1,7 +1,20 @@
-
-
 .form-insert {
   margin-top: 5%;
   padding: 3%;
-  border-style: groove;
+  box-shadow: 2px 2px 53px #0a262c;
+}
+
+.btn-primary {
+  max-width: 100px;
+  max-height: 50px;
+  background: #051a1e;
+  outline: none;
+  border: none;
+  min-width: 120px;
+}
+
+.btn-primary:hover {
+  color: black;
+  background-color: white;
+  border: 2px solid #051a1e;
 }

@@ -1,12 +1,28 @@
-.stle{
+.stle {
   font-family: cursive;
   font-style: italic;
   font-size: 35px;
   text-align: center;
   color: white;
-  text-shadow: 2px 2px 4px #000000
+  text-shadow: 2px 2px 4px #000000;
 }
 
+.card-body {
+  border: 3px solid #051a1e;
+  border-radius: none;
+  display: flex;
+  justify-content: center;
+}
+
+.rounded-0 {
+  /* border: none !important; */
+  border-radius: none !important;
+  font-size: 17px;
+}
+
+.card-header:first-child {
+  border-radius: 0 !important;
+}
 
 .bgimg {
   position: fixed;
@@ -17,13 +33,10 @@
   min-height: 100%;
 }
 
-
 .error-form {
-
   color: red;
   text-align: left;
   font-style: italic;
   font-size: small;
   font-weight: bold;
-
 }
