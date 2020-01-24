@@ -80,6 +80,20 @@ router.get('/getEvaluatorType/:id?',function(req,res,next) {
   });
 });
 
+router.put('/getAvgSubmittedIdeasForRanking/:id?',function(req,res,next) {
+
+  IdeaEvaluation.getAvgSubmittedIdeas(req.body, function(err,rows){
+
+    if(err)
+    {
+      res.json(err);
+    }
+    else{
+      res.json(rows);
+    }
+  });
+});
+
 router.get('/getEvaluatorsByType/:id?',function(req,res,next) {
 
   IdeaEvaluation.getEvaluatorsByType(req.params.id, function(err,rows){

@@ -29,7 +29,7 @@ export class EvaluationComponent implements OnInit {
 
     const self = this;
 
-    this.projService.getEvaluatorsTypeID(80).subscribe(
+    this.projService.getEvaluatorsTypeID(67).subscribe(
       evaluator => {
         this.evaluator = evaluator;
         console.log(this.evaluator);

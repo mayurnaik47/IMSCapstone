@@ -65,6 +65,25 @@ var IdeaEvaluation= {
     return res;
   },
 
+  getAvgSubmittedIdeas: function(ideas, callback){
+
+    db.connect(function (err) {
+      if(err) {
+        console.log(err.code)
+        console.log("'Error connecting to Db'");
+        return;
+      }
+    });
+
+    let ideaIds = ideas.map(function (val, index) {
+      return val.ideaID;
+    });
+
+    let res = db.query("select avg(rating) as score, ideaID from IdeaEvaluation group by IdeaID having IdeaID IN ( ? ) order by score desc",[ideaIds], callback);
+
+    return res;
+  },
+
   getEvaluatorType: function(evalID, callback){
 
     db.connect(function (err) {
