@@ -15,6 +15,7 @@ export  class IdeaEvaluation {
   ideaID: number;
   rating: number;
   evalStatus: string;
+  typeID: number;
 }
 
 export  class IdeaModel {
@@ -30,6 +31,8 @@ export  class IdeaModel {
   typeName: string;
   statusName: string;
   evalStatus: string;
+  score: number;
+  rank: number;
 }
 
 export  class MaxID {

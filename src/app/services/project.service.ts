@@ -72,6 +72,11 @@ export class ProjectService {
     return this.http.get<IdeaEvaluation[]>('http://localhost:3000/routeIdeaEvaluation/getIdeaRatings/' + ideaID + '?userID=' + userID);
   }
 
+  getAvgSubmittedIdeasForRanking(ideas: IdeaModel[]): Observable<IdeaModel[]> {
+
+    return this.http.put<IdeaModel[]>('http://localhost:3000/routeIdeaEvaluation/getAvgSubmittedIdeasForRanking/31?', ideas, httpOptions);
+  }
+
   getEvaluatorsTypeID(userID: number): Observable<Evaluators> {
     return this.http.get<Evaluators>('http://localhost:3000/routeIdeaEvaluation/getEvaluatorType/' + userID );
   }
