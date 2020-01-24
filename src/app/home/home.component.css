@@ -1,6 +1,6 @@
 .homeimage {
   position: fixed;
-  background: url(../../assets/images/tech2.jpg) no-repeat center;
+  background: url(../../assets/images/idea.png) no-repeat;
   opacity: 1;
   background-size: cover;
   min-width: 100%;
@@ -10,9 +10,53 @@
 .search_bar {
   margin-top: 12%;
   background-color: aliceblue;
-  max-width: 70%;
+  max-width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: auto
+  border-radius: 15px;
+  margin-bottom: auto;
+  box-shadow: 1px 2px 55px cadetblue;
 }
 
+.welcome {
+  color: white;
+  font-family: fantasy !important;
+  margin: 0;
+}
+
+nav {
+  background-color: black !important;
+}
+
+.btn {
+  padding: 7%;
+  font-size: inherit !important;
+  border: none;
+}
+
+.form-control-lg {
+  font-size: initial !important;
+}
+
+.btn-primary {
+  max-width: 100px;
+  min-height: 40px;
+  background: #051a1e;
+  outline: none;
+  border: none;
+  padding: 10%;
+  display: inline-flex;
+  width: 40px;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  color: black;
+  background-color: white;
+  border: 3px solid #051a1e;
+}
+
+.btn-success {
+  background-color: orange;
+  border: none;
+}
