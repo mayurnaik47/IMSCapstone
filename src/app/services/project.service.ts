@@ -12,6 +12,7 @@ import {
   MaxID,
   UserModel
 } from '../models/project.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +27,7 @@ const httpOptions = {
 export class ProjectService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   getUserDetailsByUsername(name: string): Observable<UserModel> {
     return this.http.get<UserModel>('http://localhost:3000/routeUsers/getUserByUsername/' + name);
@@ -127,6 +128,15 @@ export class ProjectService {
 
   getMaxid(): Observable<MaxID> {
     return this.http.get<MaxID>('http://localhost:3000/routeIdea/maxId/1');
+  }
+
+  checkIfLoggedIn() {
+   const ifLoggedIn =  sessionStorage.getItem('loggedin');
+
+   if (ifLoggedIn === 'false' || ifLoggedIn === null) {
+     this.router.navigate(['']);
+   }
+
   }
 
 }

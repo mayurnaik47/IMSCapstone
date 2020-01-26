@@ -17,7 +17,7 @@ export class InsertupdateComponent implements OnInit {
   isDesc = false;
   isEsttime = false;
   isType = false;
-  maxId: MaxID;
+  maxId: number;
   ideaTypes: IdeaType[];
 
 
@@ -41,21 +41,21 @@ export class InsertupdateComponent implements OnInit {
     let self = this;
 
       if(!this.newIdea.title) this.isTitle = true;
-      else this.isTitle = false;
+      else { this.isTitle = false; }
 
       if(!this.newIdea.description) this.isDesc = true;
       else this.isDesc = false;
 
-      console.log("TypeID"+this.newIdea.typeID);
-      if(!this.newIdea.typeID || this.newIdea.typeID == -1) this.isType = true;
-      else this.isType = false;
+      if(!this.newIdea.typeID || this.newIdea.typeID === -1) this.isType = true;
+      else { this.isType = false; }
 
       if(!this.newIdea.estTime) this.isEsttime = true;
       else this.isEsttime = false;
 
       if (!this.isEsttime && !this.isType && !this.isDesc && !this.isTitle) {
 
-        this.newIdea.usersID = 51;
+        // tslint:disable-next-line:radix
+        this.newIdea.usersID = parseInt(sessionStorage.getItem('usersID'));
         this.newIdea.statusID = 1;
 
         this.projectService.addNewUserIdea(this.newIdea).subscribe(
@@ -68,7 +68,7 @@ export class InsertupdateComponent implements OnInit {
 
             this.projectService.getMaxid().subscribe(
               maxId => {
-                this.maxId = maxId;
+                this.maxId = maxId.maxId;
               }
 
             );
@@ -78,7 +78,7 @@ export class InsertupdateComponent implements OnInit {
 
         // tslint:disable-next-line:only-arrow-functions
         setTimeout(function() {
-          alert("Idea has been inserted successfully..Node the idea ID"+self.maxId.maxId);
+          alert("Idea has been inserted successfully..Node the idea ID"+self.maxId);
         },500);
 
 

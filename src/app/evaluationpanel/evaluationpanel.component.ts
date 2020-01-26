@@ -27,6 +27,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
   ideaRatings: IdeaEvaluation;
   statusID: number;
   evaluators: Evaluators[];
+  evalUserID: number;
 
   evalStatusIcon = [];
 
@@ -45,6 +46,8 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line:radix
+    this.evalUserID = parseInt(sessionStorage.getItem('usersID'));
     this.ideaRatings = new IdeaEvaluation();
     this.route.params.subscribe(
       (param: Params) => {
@@ -66,7 +69,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
 
   getIdeasByIdeaId(ideaId) {
 
-    this.projService.getIdeaRatingsByIdeaID(ideaId, 67).subscribe(
+    this.projService.getIdeaRatingsByIdeaID(ideaId, this.evalUserID).subscribe(
       ideaEvalDetails => {
         if (ideaEvalDetails[0] && ideaEvalDetails[0].evalStatus === 'SUBMITTED') { this.isSubmit = true; }
         else if (ideaEvalDetails[0] && ideaEvalDetails[0].evalStatus === 'NOT SUBMITTED') { this.isSubmit = false; }
@@ -82,7 +85,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
         this.checkIfEvaluatorsCompleteEvaluation(ideaId, this.ideaDetails[0].typeID);
 
         if (this.ideaDetails[0].statusID === 2) {
-            this.projService.getIdeaRatingsByIdeaID(ideaId, 67).subscribe(
+            this.projService.getIdeaRatingsByIdeaID(ideaId, this.evalUserID).subscribe(
               ratings => {
                  this.ratings = ratings.map(function(val) {
                     return val.rating;
@@ -159,7 +162,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line:only-arrow-functions
     const self = this;
     // todo: need to make this generic
-    this.ideaRatings.usersID = 67;
+    this.ideaRatings.usersID = this.evalUserID;
     this.ideaRatings.ideaID = this.ideaDetails[0].ideaID;
     this.ideaRatings.evalStatus = 'NOT SUBMITTED';
     console.log("hello"+ this.ideaRatings.evalStatus);
@@ -207,7 +210,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
 
 
     // todo: need to make this generic
-    this.ideaRatings.usersID = 67;
+    this.ideaRatings.usersID = this.evalUserID;
     this.ideaRatings.ideaID = this.ideaDetails[0].ideaID;
     this.ideaRatings.evalStatus = 'SUBMITTED';
 
@@ -230,7 +233,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
     this.feedbackObject =  new IdeaFeedback();
 
     // todo: need to make this generic
-    this.feedbackObject.usersID = 67;
+    this.feedbackObject.usersID = this.evalUserID;
     this.feedbackObject.ideaID = this.ideaDetails[0].ideaID;
     this.feedbackObject.message = this.feedback;
 

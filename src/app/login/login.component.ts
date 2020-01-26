@@ -33,25 +33,24 @@ export class LoginComponent implements OnInit {
 
     if (this.password && this.username) {
 
-        console.log(this.password);
-
-
         this.projService.getUserDetailsByUsername(this.username).subscribe(
           users => {
             this.users = users;
+            console.log(this.users);
           },
           error => console.log('Error: ' + error),
           () => {
 
             if (this.users != null) {
               if (this.username === this.users[0].userName && this.password === this.users[0].password) {
-               console.log('Congrats');
                this.loggedIn = true;
                sessionStorage.setItem('username', this.username);
                sessionStorage.setItem('fName', this.users[0].fName);
                sessionStorage.setItem('lName', this.users[0].lName);
+               sessionStorage.setItem('usersID', this.users[0].usersID);
                this.firstName = sessionStorage.getItem('fName');
                this.lastName = sessionStorage.getItem('lName');
+               sessionStorage.setItem('loggedin', this.loggedIn.toString());
                this.router.navigate(['home']);
               } else {
                 this.unserpassMatch = false;
@@ -63,7 +62,7 @@ export class LoginComponent implements OnInit {
           }
         );
       }
-
+    sessionStorage.setItem('loggedin', this.loggedIn.toString());
 
   } // Function ends
 

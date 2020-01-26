@@ -12,6 +12,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 export class MyideasComponent implements OnInit {
 
   ideas: IdeaModel[];
+  userID: number;
   displayedColumns: string[] = ['ideaID', 'title', 'typeID', 'statusID'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -22,8 +23,9 @@ export class MyideasComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.initIdeaList();
+    // tslint:disable-next-line:radix
+   this.userID = parseInt(sessionStorage.getItem('usersID'));
+   this.initIdeaList();
 
   }
 
@@ -32,7 +34,7 @@ export class MyideasComponent implements OnInit {
 
     const self = this;
 
-    this.projService.getIdeasByUsers(51).subscribe(
+    this.projService.getIdeasByUsers(this.userID).subscribe(
       ideas => {
         this.ideas = ideas;
         console.log(this.ideas);

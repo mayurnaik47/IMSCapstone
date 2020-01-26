@@ -53,8 +53,13 @@ export class IdearankingComponent implements OnInit {
 
             this.ideasSubmitted.map(function(val) {
               val.score = map.get(val.ideaID.toString());
-              self.rank++;
-              val.rank =  self.rank;
+            });
+
+            this.ideasSubmitted.sort(( a , b) => b.score - a.score);
+
+            this.ideasSubmitted.map(function(val) {
+            self.rank++;
+            val.rank =  self.rank;
             });
 
             this.dataSource = new MatTableDataSource<IdeaModel>(this.ideasSubmitted);

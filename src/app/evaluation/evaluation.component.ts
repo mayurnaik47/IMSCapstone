@@ -13,6 +13,7 @@ export class EvaluationComponent implements OnInit {
 
   ideas: IdeaModel[];
   evaluator: Evaluators;
+  evalUserID: number;
   displayedColumns: string[] = ['ideaID', 'title', 'userName', 'statusID', 'Action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -22,6 +23,8 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line:radix
+    this.evalUserID = parseInt(sessionStorage.getItem('usersID'));
     this.initEvalList();
   }
 
@@ -29,7 +32,7 @@ export class EvaluationComponent implements OnInit {
 
     const self = this;
 
-    this.projService.getEvaluatorsTypeID(67).subscribe(
+    this.projService.getEvaluatorsTypeID(this.evalUserID).subscribe(
       evaluator => {
         this.evaluator = evaluator;
         console.log(this.evaluator);

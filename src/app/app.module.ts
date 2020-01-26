@@ -21,7 +21,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatPaginatorModule,
-  MatSliderModule
+  MatSliderModule, MatSortModule
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { IdeadetailsComponent } from './ideadetails/ideadetails.component';
@@ -30,7 +30,7 @@ import { EvaluationpanelComponent } from './evaluationpanel/evaluationpanel.comp
 import { IdearankingComponent } from './idearanking/idearanking.component';
 
 const appRoute: Routes = [
-  { path: '' , component : HomeComponent},
+  { path: 'login' , component : LoginComponent},
   { path: 'home' , component : HomeComponent},
   { path: 'evalphase1' , component : EvaluationComponent},
   { path: 'evalphase1/evalPanel/:id' , component : EvaluationpanelComponent},
@@ -72,7 +72,8 @@ const appRoute: Routes = [
     MatBadgeModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxGaugeModule
+    NgxGaugeModule,
+    MatSortModule
   ],
   providers: [ProjectService],
   bootstrap: [AppComponent]

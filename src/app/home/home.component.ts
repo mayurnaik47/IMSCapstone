@@ -16,11 +16,15 @@ export class HomeComponent implements OnInit {
   ideas: IdeaModel[];
   invalidQuery = false;
   noRecords = false;
+  firstName: string;
+  lastName: string;
 
 
   constructor(private projService: ProjectService, private route: Router) { }
 
   ngOnInit() {
+    this.firstName = sessionStorage.getItem('fName');
+    this.lastName = sessionStorage.getItem('lName');
   }
 
   processSearchQuery(query, showAll) {
