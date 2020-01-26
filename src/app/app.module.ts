@@ -20,7 +20,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressSpinnerModule,
   MatSliderModule, MatSortModule
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,18 +28,21 @@ import { IdeadetailsComponent } from './ideadetails/ideadetails.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { EvaluationpanelComponent } from './evaluationpanel/evaluationpanel.component';
 import { IdearankingComponent } from './idearanking/idearanking.component';
+import { Evaluationph2Component } from './evaluationph2/evaluationph2.component';
+import { AdminComponent } from './admin/admin.component';
 
 const appRoute: Routes = [
-  { path: 'login' , component : LoginComponent},
+  { path: 'login' , component : HomeComponent},
   { path: 'home' , component : HomeComponent},
   { path: 'evalphase1' , component : EvaluationComponent},
+  { path: 'evalphase2' , component : Evaluationph2Component},
   { path: 'evalphase1/evalPanel/:id' , component : EvaluationpanelComponent},
   { path: 'search/:query' , component : SearchresultsComponent},
   { path: 'insertupdateidea' , component : InsertupdateComponent},
   { path: 'myideas' , component : MyideasComponent},
   { path: 'myideas/ideaDetails/:id' , component : IdeadetailsComponent},
-  { path: 'rankingph1' , component : IdearankingComponent}
-  // { path: 'admin' , component : AdminComponent}
+  { path: 'rankingph1' , component : IdearankingComponent},
+   { path: 'admin' , component : AdminComponent}
 
 ];
 
@@ -54,7 +57,9 @@ const appRoute: Routes = [
     IdeadetailsComponent,
     EvaluationComponent,
     EvaluationpanelComponent,
-    IdearankingComponent
+    IdearankingComponent,
+    Evaluationph2Component,
+    AdminComponent
 
   ],
   imports: [
@@ -73,7 +78,8 @@ const appRoute: Routes = [
     MatFormFieldModule,
     MatInputModule,
     NgxGaugeModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [ProjectService],
   bootstrap: [AppComponent]

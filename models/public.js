@@ -23,22 +23,38 @@ var PublicMessage= {
     let res = db.query("SELECT * from PublicComment",callback);
 
     return res;
-   }
-  //
-  // addNewComment:function(public,callback){
-  //
-  //   let maxId = 0;
-  //   db.connect(function (err) {
-  //     if(err) {console.log(err.code)
-  //       console.log("'Error connecting to Db'")};
-  //     return;
-  //   });
-  //
-  //   db.query("Insert into PublicComment values(?,?,?)",[public,newIdea.title,newIdea.description,newIdea.estTime,newIdea.cost,newIdea.docName,
-  //         newIdea.usersID,newIdea.typeID,1],callback);
-  //     }
-  //
-  // }
+  },
+
+  getPhaseState: function(callback){
+
+    db.connect(function (err) {
+      if(err) {
+        console.log(err.code)
+        console.log("'Error connecting to Db'");
+        return;
+      }
+    });
+
+    let res = db.query("SELECT * from Phase",callback);
+
+    return res;
+  },
+
+  updatePhase: function(phaseid,action,callback){
+
+    let res;
+    db.connect(function (err) {
+      if(err) {console.log(err.code)
+        console.log("'Error connecting to Db'")};
+      return;
+    });
+
+      res = db.query("update Phase set  phase=? , action=?",[phaseid, action],callback);
+
+    // db.end();
+    return res;
+  }
+
 };
 
 module.exports=PublicMessage;

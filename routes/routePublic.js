@@ -26,5 +26,37 @@ router.get('/:id?',function(req,res,next) {
   });
 });
 
+// Get current phase
+router.get('/phase/:id?',function(req,res,next) {
+
+  PublicMessage.getPhaseState(function(err,rows){
+
+    if(err)
+    {
+      res.json(err);
+    }
+    else{
+      res.json(rows);
+    }
+  });
+});
+
+// update phase and status
+router.put('/phase/:id',function(req,res){
+
+  PublicMessage.updatePhase(req.params.id,req.query.action,function(err,rows){
+
+    if(err)
+    {
+      res.json(err);
+    }
+    else
+    {
+      res.json(rows);
+    }
+  });
+});
+
+
 
 module.exports=router;

@@ -25,6 +25,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
+
+    // save phase details in session storage
+    this.projService.getPhaseDetails().subscribe(
+      phase => {
+        sessionStorage.setItem('phaseID', phase[0].phase.toString());
+        sessionStorage.setItem('phaseAction', phase[0].action);
+      }
+    );
   }
 
   processSearchQuery(query, showAll) {

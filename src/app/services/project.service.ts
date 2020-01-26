@@ -9,7 +9,7 @@ import {
   IdeaModel,
   IdeaStatus,
   IdeaType,
-  MaxID,
+  MaxID, Phase,
   UserModel
 } from '../models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -47,6 +47,15 @@ export class ProjectService {
 
   getIdeasWithIdeaId(ideaId: number): Observable<IdeaModel> {
     return this.http.get<IdeaModel>('http://localhost:3000/routeIdea/' + ideaId + '?idType=ideaID');
+  }
+
+  getPhaseDetails(): Observable<Phase> {
+    return this.http.get<Phase>('http://localhost:3000/routePublic/phase/2');
+  }
+
+  updatePhaseDetails(phase: Phase): Observable<IdeaEvaluation> {
+    console.log(phase);
+    return this.http.put<IdeaEvaluation>('http://localhost:3000/routePublic/phase/' + phase.phase + '?action=' + phase.action , phase, httpOptions);
   }
 
   getIdeasWithStatusId(statusId: number): Observable<IdeaModel[]> {

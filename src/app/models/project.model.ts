@@ -19,6 +19,11 @@ export  class IdeaEvaluation {
   typeID: number;
 }
 
+export  class Phase {
+  phase: number;
+  action: string;
+}
+
 export  class IdeaModel {
   ideaID: number;
   title: string;
