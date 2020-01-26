@@ -1,5 +1,6 @@
 
 export  class UserModel {
+  usersID: number;
   userName: string;
   email: string;
   password: string;
@@ -16,6 +17,11 @@ export  class IdeaEvaluation {
   rating: number;
   evalStatus: string;
   typeID: number;
+}
+
+export  class Phase {
+  phase: number;
+  action: string;
 }
 
 export  class IdeaModel {

@@ -9,9 +9,10 @@ import {
   IdeaModel,
   IdeaStatus,
   IdeaType,
-  MaxID,
+  MaxID, Phase,
   UserModel
 } from '../models/project.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +27,7 @@ const httpOptions = {
 export class ProjectService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   getUserDetailsByUsername(name: string): Observable<UserModel> {
     return this.http.get<UserModel>('http://localhost:3000/routeUsers/getUserByUsername/' + name);
@@ -46,6 +47,15 @@ export class ProjectService {
 
   getIdeasWithIdeaId(ideaId: number): Observable<IdeaModel> {
     return this.http.get<IdeaModel>('http://localhost:3000/routeIdea/' + ideaId + '?idType=ideaID');
+  }
+
+  getPhaseDetails(): Observable<Phase> {
+    return this.http.get<Phase>('http://localhost:3000/routePublic/phase/2');
+  }
+
+  updatePhaseDetails(phase: Phase): Observable<IdeaEvaluation> {
+    console.log(phase);
+    return this.http.put<IdeaEvaluation>('http://localhost:3000/routePublic/phase/' + phase.phase + '?action=' + phase.action , phase, httpOptions);
   }
 
   getIdeasWithStatusId(statusId: number): Observable<IdeaModel[]> {
@@ -127,6 +137,15 @@ export class ProjectService {
 
   getMaxid(): Observable<MaxID> {
     return this.http.get<MaxID>('http://localhost:3000/routeIdea/maxId/1');
+  }
+
+  checkIfLoggedIn() {
+   const ifLoggedIn =  sessionStorage.getItem('loggedin');
+
+   if (ifLoggedIn === 'false' || ifLoggedIn === null) {
+     this.router.navigate(['']);
+   }
+
   }
 
 }

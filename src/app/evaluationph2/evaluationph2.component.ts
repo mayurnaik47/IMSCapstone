@@ -1,17 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Evaluators, IdeaEvaluation, IdeaModel, Phase} from '../models/project.model';
+import {Evaluators, IdeaModel} from '../models/project.model';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-evaluation',
-  templateUrl: './evaluation.component.html',
-  styleUrls: ['./evaluation.component.css']
+  selector: 'app-evaluationph2',
+  templateUrl: './evaluationph2.component.html',
+  styleUrls: ['./evaluationph2.component.css']
 })
-export class EvaluationComponent implements OnInit {
+export class Evaluationph2Component implements OnInit {
 
-  phase: Phase;
   ideas: IdeaModel[];
   evaluator: Evaluators;
   evalUserID: number;
@@ -24,12 +23,8 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.phase = new Phase();
     // tslint:disable-next-line:radix
-    this.phase.phase = parseInt(sessionStorage.getItem('phaseID'));
-    this.phase.action = sessionStorage.getItem('phaseAction');
     this.evalUserID = parseInt(sessionStorage.getItem('usersID'));
-    console.log(this.phase);
     this.initEvalList();
   }
 

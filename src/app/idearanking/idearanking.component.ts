@@ -53,8 +53,13 @@ export class IdearankingComponent implements OnInit {
 
             this.ideasSubmitted.map(function(val) {
               val.score = map.get(val.ideaID.toString());
-              self.rank++;
-              val.rank =  self.rank;
+            });
+
+            this.ideasSubmitted.sort(( a , b) => b.score - a.score);
+
+            this.ideasSubmitted.map(function(val) {
+            self.rank++;
+            val.rank =  self.rank;
             });
 
             this.dataSource = new MatTableDataSource<IdeaModel>(this.ideasSubmitted);
@@ -63,54 +68,6 @@ export class IdearankingComponent implements OnInit {
         );
       }
     );
-
-
-
-
-
-
-
-    // this.projService.getDistinctSubmittedIdeas().subscribe(
-    //   evalIdeas => {
-    //     this.distinctEvalideas = evalIdeas;
-    //   },
-    //   () => {},
-    //   () => {
-    //    //
-    //    // this.distinctEvalideas.forEach(function(val, index) {
-    //    //
-    //    //    self.projService.getEvaluatorsByTypeID(val.typeID).subscribe(
-    //    //     evaluators => {
-    //    //       self.evaluators = evaluators;
-    //    //
-    //    //     }, () => {},
-    //    //     () => {
-    //    //       self.isReadyForDetailedProposal = true;
-    //    //       self.evaluators.forEach(function(value, index) {
-    //    //         self.projService.getIdeaRatingsByIdeaID(val.ideaID, value.usersID).subscribe(
-    //    //           evaluationStatus => {
-    //    //             if (evaluationStatus[0] && evaluationStatus[0].evalStatus === 'SUBMITTED') {
-    //    //             } else {
-    //    //               self.isReadyForDetailedProposal = false;
-    //    //             }
-    //    //           }
-    //    //         );
-    //    //       });
-    //    //
-    //    //
-    //    //         if (self.isReadyForDetailedProposal === true) {
-    //    //           console.log('suceessfull' + val.ideaID);
-    //    //           self.ideaIds.push(val.ideaID);
-    //    //         }
-    //    //     });
-    //    // });
-    //    //
-    //    //  setTimeout(function() {
-    //    //    console.log("success" + self.ideaIds);
-    //    //
-    //    //  }, 1000);
-    //   }
-    // );
   }
 
 }
