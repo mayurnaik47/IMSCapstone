@@ -38,7 +38,7 @@
       <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element" [routerLink]="['/evalphase1/evalPanel/',element.ideaID]">
-          <button *ngIf="element.evalStatus==null" mat-raised-button color="primary" style="color: white;background-color: brown; width: 43%">Evaluate</button>
+          <button *ngIf="element.evalStatus==null" mat-raised-button color="primary" style="color: white;background-color: brown; min-width:98px">Evaluate</button>
           <button *ngIf="element.evalStatus== 'NOT SUBMITTED'" mat-raised-button color="primary" style="color: white;background-color: darkorange">In Progress</button>
           <button *ngIf="element.evalStatus=='SUBMITTED'" mat-raised-button color="primary" style="color: white;background-color: green">Submitted</button>
         </td>

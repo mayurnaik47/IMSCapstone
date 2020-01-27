@@ -1,9 +1,18 @@
+
 .grad {
   background-color: #051a1e;
   padding: 25px;
   color: white;
   width: 100%;
   margin: 0;
+}
+
+.logo {
+  align-self: center;
+  padding-left: 1%;
+  position: absolute;
+  height: 103px;
+  width: 250px;
 }
 
 .textformat {

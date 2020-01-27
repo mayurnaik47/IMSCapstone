@@ -18,3 +18,13 @@
   background-color: white;
   border: 2px solid #051a1e;
 }
+
+.check-circle{
+  background-repeat: no-repeat;
+  display: inline-block;
+  color: green;
+  text-align: center;
+  font-size: 82px ;
+  height: 82px ;
+  width: 82px ;
+}
