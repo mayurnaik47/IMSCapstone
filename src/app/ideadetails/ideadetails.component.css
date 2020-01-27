@@ -1,3 +1,4 @@
+
 #comment-1 {
   border: 1px solid;
   border-radius: 12%;
@@ -22,3 +23,23 @@
   font-family: auto;
   margin-bottom: 1%;
 }
+
+
+.update-button {
+    right: 30px;
+    height: 44px;
+    align-self: center;
+    width: 100px;
+    border: 2px solid #051a1e;
+    color: white;
+    font-weight: bold;
+    margin-left: 2%;
+    background-color: #051a1e;
+}
+
+.update-button:hover {
+  background-color: white !important;
+  color: black;
+  border: 2px solid #051a1e;
+}
+
