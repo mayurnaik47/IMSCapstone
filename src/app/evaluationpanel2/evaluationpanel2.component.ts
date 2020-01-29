@@ -1,16 +1,16 @@
-import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Evaluators, IdeaCriteria, IdeaEvaluation, IdeaFeedback, IdeaModel} from '../models/project.model';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute, Params} from '@angular/router';
-import {fakeAsync} from '@angular/core/testing';
-import {isLineBreak} from 'codelyzer/angular/sourceMappingVisitor';
+import {saveAs} from 'file-saver';
+import {FileserviceService} from '../services/fileservice.service';
 
 @Component({
-  selector: 'app-evaluationpanel',
-  templateUrl: './evaluationpanel.component.html',
-  styleUrls: ['./evaluationpanel.component.css']
+  selector: 'app-evaluationpanel2',
+  templateUrl: './evaluationpanel2.component.html',
+  styleUrls: ['./evaluationpanel2.component.css']
 })
-export class EvaluationpanelComponent implements OnInit, OnDestroy {
+export class Evaluationpanel2Component implements OnInit, OnDestroy {
 
   ideaDetails: IdeaModel;
   ideaId: number;
@@ -42,7 +42,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
   isSubmit = false;
 
 
-  constructor(private projService: ProjectService, private route: ActivatedRoute) {
+  constructor(private projService: ProjectService, private route: ActivatedRoute, private _fileService: FileserviceService) {
   }
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
       this.getCommentsByIdeaId(this.ideaId);
     }, 2000);
     this.getIdeasByIdeaId(this.ideaId);
-    this.getIdeasByPhase(1);
+    this.getIdeasByPhase(2);
   }
 
   ngOnDestroy() {
@@ -84,16 +84,16 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
       }, () => {} , () => {
         this.checkIfEvaluatorsCompleteEvaluation(ideaId, this.ideaDetails[0].typeID);
 
-        if (this.ideaDetails[0].statusID === 2) {
-            this.projService.getIdeaRatingsByIdeaID(ideaId, this.evalUserID).subscribe(
-              ratings => {
-                 this.ratings = ratings.map(function(val) {
-                    return val.rating;
-                 });
-                 this.calculateAverage();
-              }
-            );
-          }
+        if (this.ideaDetails[0].statusID === 9) {
+          this.projService.getIdeaRatingsByIdeaID(ideaId, this.evalUserID).subscribe(
+            ratings => {
+              this.ratings = ratings.map(function(val) {
+                return val.rating;
+              });
+              this.calculateAverage();
+            }
+          );
+        }
       });
   }
 
@@ -114,33 +114,33 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
 
     this.projService.getEvaluatorsByTypeID(typeID).subscribe(
       evaluators => {
-          this.evaluators = evaluators;
+        this.evaluators = evaluators;
 
       }, () => {},
       () => {
-       this.evaluators.forEach(function(val, index) {
-         self.projService.getIdeaRatingsByIdeaID(ideaID, val.usersID).subscribe(
-           evaluationStatus => {
+        this.evaluators.forEach(function(val, index) {
+          self.projService.getIdeaRatingsByIdeaID(ideaID, val.usersID).subscribe(
+            evaluationStatus => {
               if (evaluationStatus[0] && evaluationStatus[0].evalStatus === 'SUBMITTED') {
                 self.evalStatusIcon[index] = 'accent';
               } else {
                 self.evalStatusIcon[index] = 'primary';
                 self.isReadyForDetailedProposal = false;
               }
-           }
-         );
+            }
+          );
         });
       });
     setTimeout(function() {
-     if (self.isReadyForDetailedProposal === true) {
-       if (self.ideaDetails[0].statusID === 2 || self.ideaDetails[0].statusID === 1) {
-         alert('All Evaluators Submiited data successfully');
-         self.ideaDetails[0].statusID = 7;
-         self.ideaDetails[0].statusName = 'SUBMITTED FOR RANKING PH1';
-         self.projService.updateIdeaStatus(self.ideaDetails[0]).subscribe();
-       }
-     }
-   }, 800);
+      if (self.isReadyForDetailedProposal === true) {
+        if (self.ideaDetails[0].statusID === 9 || self.ideaDetails[0].statusID === 3) {
+          alert('All Evaluators Submiited data successfully');
+          self.ideaDetails[0].statusID = 8;
+          self.ideaDetails[0].statusName = 'SUBMITTED FOR RAKING PH2';
+          self.projService.updateIdeaStatus(self.ideaDetails[0]).subscribe();
+        }
+      }
+    }, 800);
   }
 
   getCommentsByIdeaId(ideaId) {
@@ -155,11 +155,11 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
   saveScore(isUpdate) {
     this.isSubmit = false;
 
-    if (this.ideaDetails[0].statusID === 1 || this.ideaDetails[0].statusID === 2) {
-      // Updating Idea Status to Processing
-      this.ideaDetails[0].statusName = 'PROCESSING PH1';
-      this.ideaDetails[0].statusID = 2;
-      this.statusID = 2;
+    // Updating Idea Status to Processing
+    if (this.ideaDetails[0].statusID === 3 || this.ideaDetails[0].statusID === 9) {
+      this.ideaDetails[0].statusName = 'PROCESSING PH2';
+      this.ideaDetails[0].statusID = 9;
+      this.statusID = 9;
       this.projService.updateIdeaStatus(this.ideaDetails[0]).subscribe();
     }
     // tslint:disable-next-line:only-arrow-functions
@@ -168,13 +168,12 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
     this.ideaRatings.usersID = this.evalUserID;
     this.ideaRatings.ideaID = this.ideaDetails[0].ideaID;
     this.ideaRatings.evalStatus = 'NOT SUBMITTED';
-    console.log("hello"+ this.ideaRatings.evalStatus);
 
     this.criteria.forEach(function(val, index) {
       self.ideaRatings.critID = val.critID;
       self.ideaRatings.rating = self.ratings[index];
-      if (isUpdate === false) { self.projService.addNewRatingsByUserIdeaID(self.ideaRatings).subscribe(); console.log("add new"); }
-      else if (isUpdate === true) { self.projService.updateRatingsByUserIdeaID(self.ideaRatings).subscribe();  console.log("update new");}
+      if (isUpdate === false) { self.projService.addNewRatingsByUserIdeaID(self.ideaRatings).subscribe();  }
+      else if (isUpdate === true) { self.projService.updateRatingsByUserIdeaID(self.ideaRatings).subscribe(); }
     });
 
 
@@ -202,10 +201,10 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
     if (this.isSubmit === null) {
       directSubmit = true;
       // Updating Idea Status to Processing
-      if (this.ideaDetails[0].statusID === 1 || this.ideaDetails[0].statusID === 2) {
-        this.ideaDetails[0].statusName = 'PROCESSING PH1';
-        this.ideaDetails[0].statusID = 2;
-        this.statusID = 2;
+      if (this.ideaDetails[0].statusID === 3 || this.ideaDetails[0].statusID === 9) {
+        this.ideaDetails[0].statusName = 'PROCESSING PH2';
+        this.ideaDetails[0].statusID = 9;
+        this.statusID = 9;
         this.projService.updateIdeaStatus(this.ideaDetails[0]).subscribe();
       }
     }
@@ -247,6 +246,16 @@ export class EvaluationpanelComponent implements OnInit, OnDestroy {
     this.feedbackObjects.push(this.feedbackObject);
     this.feedback = null;
 
+  }
+
+  downloadFile(){
+    var filename = this.ideaDetails[0].docName;
+
+    this._fileService.downloadFile(filename)
+      .subscribe(
+        data => saveAs(data, filename),
+        error => console.error(error)
+      );
   }
 
 }

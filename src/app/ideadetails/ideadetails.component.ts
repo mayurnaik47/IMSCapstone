@@ -2,6 +2,9 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ProjectService} from '../services/project.service';
 import {IdeaFeedback, IdeaModel, IdeaType} from '../models/project.model';
+import {FileUploader} from 'ng2-file-upload';
+
+const uri = 'http://localhost:3000/file/upload';
 
 @Component({
   selector: 'app-ideadetails',
@@ -16,14 +19,24 @@ export class IdeadetailsComponent implements OnInit {
   isType = false;
   validData = true;
   feedbacks: IdeaFeedback[];
+  uploader: FileUploader = new FileUploader({url: uri});
+
+  attachmentList: any = [];
 
 
   constructor(private projService: ProjectService, private route: ActivatedRoute) {
+
+    this.uploader.onCompleteItem = (item: any, response: any , status: any, headers: any) => {
+      this.attachmentList.push(JSON.parse(response));
+      this.ideaDetails[0].docName = this.attachmentList[0].uploadname;
+    }
   }
 
   ngOnInit() {
 
-
+    this.uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    }
 
     this.projService.getAllIdeaTypes().subscribe(
       ideaTypes => {

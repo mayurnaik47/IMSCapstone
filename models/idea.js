@@ -134,8 +134,8 @@ var Idea= {
     else if (updateAttr=='docName')
       res = db.query("update Idea set  docName=? where ideaID=?",[idea.docName, id],callback);
     else if (updateAttr=='all')
-      res = db.query("update Idea set  title=? , description=? , estTime = ?, cost = ? , typeID=?  " +
-        " where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, id],callback);
+      res = db.query("update Idea set  title=? , description=? , estTime = ?, cost = ? , typeID=?  , docName=?" +
+        "where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, idea.docName, id],callback);
 
     // db.end();
     return res;

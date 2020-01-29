@@ -127,6 +127,10 @@ export class ProjectService {
     return this.http.post<IdeaFeedback>('http://localhost:3000/routeFeedback/', comment, httpOptions);
   }
 
+  addNewFiles(formData: FormData): Observable<IdeaFeedback> {
+    return this.http.post<IdeaFeedback>('http://localhost:3000/fileUpload/api/upload', formData, httpOptions);
+  }
+
   updateIdeaStatus(idea: IdeaModel): Observable<IdeaModel> {
     return this.http.put<IdeaModel>('http://localhost:3000/routeIdea/' + idea.ideaID + '?updateAttr=statusID', idea, httpOptions);
   }
@@ -137,6 +141,10 @@ export class ProjectService {
 
   getMaxid(): Observable<MaxID> {
     return this.http.get<MaxID>('http://localhost:3000/routeIdea/maxId/1');
+  }
+
+  delEvalScoresForph2(): Observable<IdeaEvaluation> {
+    return this.http.delete<IdeaEvaluation>('http://localhost:3000/routeIdeaEvaluation/2' ,  httpOptions);
   }
 
   checkIfLoggedIn() {

@@ -1,15 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {Evaluators, IdeaEvaluation, IdeaModel, Phase} from '../models/project.model';
+import {IdeaModel, Phase} from '../models/project.model';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-idearanking',
-  templateUrl: './idearanking.component.html',
-  styleUrls: ['./idearanking.component.css']
+  selector: 'app-idearankingph2',
+  templateUrl: './idearankingph2.component.html',
+  styleUrls: ['./idearankingph2.component.css']
 })
-export class IdearankingComponent implements OnInit {
+export class Idearankingph2Component implements OnInit {
 
   displayedColumns: string[] = ['ideaID', 'title', 'userName', 'Avg Score', 'Rank'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -45,7 +45,7 @@ export class IdearankingComponent implements OnInit {
   getDistinctEvaluationIdeas() {
     const self = this;
 
-    this.projService.getIdeasWithStatusId(7).subscribe(
+    this.projService.getIdeasWithStatusId(8).subscribe(
       ideas => {
         this.ideasSubmitted1 = ideas;
         console.log(this.ideasSubmitted1);
@@ -59,7 +59,7 @@ export class IdearankingComponent implements OnInit {
       }
     );
 
-    this.projService.getIdeasWithStatusId(3).subscribe(
+    this.projService.getIdeasWithStatusId(5).subscribe(
       ideas => {
         this.ideasSubmitted2 = ideas;
       },
@@ -104,22 +104,22 @@ export class IdearankingComponent implements OnInit {
         });
 
 
-        console.log(this.ideasSubmitted);
-        this.ideasSelected = this.ideasSubmitted.slice(0 , 5);
-        console.log(this.ideasSelected);
-        this.ideasRejected =  this.ideasSubmitted.slice(5, this.ideasSubmitted.length);
+
+        this.ideasSelected = this.ideasSubmitted.slice(0 , 3);
+
+        this.ideasRejected =  this.ideasSubmitted.slice(3, this.ideasSubmitted.length);
 
         this.dataSource = new MatTableDataSource<IdeaModel>(this.ideasSelected);
         this.dataSource.paginator = self.paginator;
 
         this.ideasSelected.forEach(function(val) {
-          val.statusID = 3;
+          val.statusID = 5;
           self.projService.updateIdeaStatus(val).subscribe();
         });
 
         if (this.ideasRejected) {
           this.ideasRejected.forEach(function(val) {
-            val.statusID = 4;
+            val.statusID = 6;
             self.projService.updateIdeaStatus(val).subscribe();
           });
         }
@@ -162,7 +162,6 @@ export class IdearankingComponent implements OnInit {
       }
     );
   }
-
 
 
 }

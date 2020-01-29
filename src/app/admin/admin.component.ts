@@ -49,6 +49,7 @@ export class AdminComponent implements OnInit {
     } else if (this.phaseDetails[0].phase == 1 && this.phaseDetails[0].action == 'STOPPED') {
       this.resetPhaseVar.phase = 2;
       this.resetPhaseVar.action = 'IN PROGRESS';
+      this.projService.delEvalScoresForph2().subscribe();
     } else if (this.phaseDetails[0].phase == 2 && this.phaseDetails[0].action == 'IN PROGRESS') {
       this.resetPhaseVar.phase = 2;
       this.resetPhaseVar.action = 'STOPPED';
@@ -57,6 +58,10 @@ export class AdminComponent implements OnInit {
     }
 
     this.projService.updatePhaseDetails(this.resetPhaseVar).subscribe();
+
+
+
+
 
     setTimeout(function() {
       self.getPhaseDetails();
@@ -74,5 +79,14 @@ export class AdminComponent implements OnInit {
    }, 600);
 
   }
+
+  getAllSelectedIdeasPhase1() {
+
+
+
+
+
+  }
+
 
 }

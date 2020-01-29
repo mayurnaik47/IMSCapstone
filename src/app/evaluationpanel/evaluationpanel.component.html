@@ -225,7 +225,7 @@
                   [tickInterval]="0.5"
                   [(ngModel)]="ratings[i]"
                   [vertical]="false">
-                  
+
                 </mat-slider>
 
                 <span style="margin-left: 1%" [matBadge]="ratings[i]"  matBadgeOverlap="false"></span>
@@ -252,19 +252,22 @@
           min-height: 40px;
           min-width: 80px;">
             <button *ngIf="isSubmit===null"  mat-raised-button color="primary" (click)="saveScore(false)">SAVE</button>
-            <button *ngIf="isSubmit===fals  e" mat-raised-button color="primary" style="background-color: darkcyan" (click)="saveScore(true)">UPDATE</button>
+            <button *ngIf="isSubmit===false" mat-raised-button color="primary" style="background-color: darkcyan" (click)="saveScore(true)">UPDATE</button>
           </div>
           <!-- Button trigger modal -->
+<!--          <div style="min-height: 40px;min-width: 80px;">-->
+<!--          <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
+<!--            Submit-->
+<!--          </button>-->
+<!--          </div>-->
+        </div>
           <div style="min-height: 40px;min-width: 80px;">
-          <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Submit
-          </button>
+            <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+              Submit
+            </button>
           </div>
         </div>
-        </div>
-
       </div>
-
     </div>
 <!--    Idea Details End--------------------------------------------------------------------------------->
     <div class="col-md-3" style="border: 2px solid #051a1e;

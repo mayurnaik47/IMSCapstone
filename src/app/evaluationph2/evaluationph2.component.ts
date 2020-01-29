@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Evaluators, IdeaModel} from '../models/project.model';
+import {Evaluators, IdeaModel, Phase} from '../models/project.model';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
@@ -14,6 +14,7 @@ export class Evaluationph2Component implements OnInit {
   ideas: IdeaModel[];
   evaluator: Evaluators;
   evalUserID: number;
+  phase: Phase;
   displayedColumns: string[] = ['ideaID', 'title', 'userName', 'statusID', 'Action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -23,6 +24,10 @@ export class Evaluationph2Component implements OnInit {
   }
 
   ngOnInit() {
+    this.phase = new Phase();
+    // tslint:disable-next-line:radix
+    this.phase.phase = parseInt(sessionStorage.getItem('phaseID'));
+    this.phase.action = sessionStorage.getItem('phaseAction');
     // tslint:disable-next-line:radix
     this.evalUserID = parseInt(sessionStorage.getItem('usersID'));
     this.initEvalList();
@@ -42,6 +47,10 @@ export class Evaluationph2Component implements OnInit {
             this.ideas = ideas;
             console.log(this.ideas);
             this.ideas.sort((a, b) => a.ideaID - b.ideaID);
+            this.ideas = this.ideas.filter(function(val) {
+              return (val.statusID === 3 || val.statusID === 9 || val.statusID === 8);
+            });
+
             this.dataSource = new MatTableDataSource<IdeaModel>(this.ideas);
             this.dataSource.paginator = self.paginator;
           }
