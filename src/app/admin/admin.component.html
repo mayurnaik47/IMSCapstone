@@ -1,3 +1,44 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <!-- <a class="navbar-brand" href="#">Research@RIT</a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+          aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse" id="navbarsExample03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link"  routerLink="/login">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  routerLink="/myideas">My Ideas
+          <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active"  routerLink="/evalphase1">Evaluation Ph-1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/rankingph1">Ranking Ph-1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/evalphase2">Evaluation Ph-2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/rankingph2">Ranking Ph-2</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/admin">Admin</a>
+      </li>
+    </ul>
+
+
+    <h5 class="welcome">Welcome, {{firstName}} {{lastName}} </h5>
+
+  </div>
+</nav>
+
+<!--end of navigation-->
+
 <div class="container" *ngIf="phaseDetails">
 <div class="row" style="padding: 3%;padding-top: 2%">
   <div class="col-md-5">
@@ -11,10 +52,10 @@
     <p><b>Status: </b>{{phaseDetails[0].action}} </p>
   </div>
   <div class="col-md-5">
-    <h5>Phase {{phaseDetails[0].phase}} Evaluation</h5>
+    <h5>Phase {{phaseNumber}} Evaluation</h5>
     <div class="row">
   <div class="example-button-row col-md-3">
-    <button mat-raised-button color="primary" (click)="doEvaluateAction()">START</button>
+    <button mat-raised-button color="primary" (click)="doEvaluateAction()">{{actionSTart}}</button>
   </div>
     <div class="example-button-row col-md-4">
       <button mat-raised-button color="accent" (click)="resetPhase()">RESET</button>

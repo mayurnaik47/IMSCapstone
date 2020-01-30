@@ -15,6 +15,9 @@ export class EvaluationComponent implements OnInit {
   ideas: IdeaModel[];
   evaluator: Evaluators;
   evalUserID: number;
+  firstName: string;
+  lastName: string;
+
   displayedColumns: string[] = ['ideaID', 'title', 'userName', 'statusID', 'Action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -24,6 +27,8 @@ export class EvaluationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.firstName = sessionStorage.getItem('fName');
+    this.lastName = sessionStorage.getItem('lName');
     this.phase = new Phase();
     // tslint:disable-next-line:radix
     this.phase.phase = parseInt(sessionStorage.getItem('phaseID'));

@@ -20,6 +20,8 @@ export class Idearankingph2Component implements OnInit {
   ideasWithScore: IdeaModel[];
   ideasSelected: IdeaModel[];
   ideasRejected: IdeaModel[];
+  firstName: string;
+  lastName: string;
 
   ideasSubmitted1: IdeaModel[];
   ideasSubmitted2: IdeaModel[];
@@ -32,7 +34,8 @@ export class Idearankingph2Component implements OnInit {
   }
 
   ngOnInit() {
-
+    this.firstName = sessionStorage.getItem('fName');
+    this.lastName = sessionStorage.getItem('lName');
     this.phase = new Phase();
     // tslint:disable-next-line:radix
     this.phase.phase = parseInt(sessionStorage.getItem('phaseID'));

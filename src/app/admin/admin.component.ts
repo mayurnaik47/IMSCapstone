@@ -12,6 +12,10 @@ export class AdminComponent implements OnInit {
 
   phaseDetails: Phase;
   resetPhaseVar: Phase;
+  firstName: string;
+  lastName: string;
+  actionSTart = 'START';
+  phaseNumber: number;
 
   // spinner
   color = 'primary';
@@ -23,6 +27,8 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.firstName = sessionStorage.getItem('fName');
+    this.lastName = sessionStorage.getItem('lName');
     this.resetPhaseVar = new Phase();
     this.getPhaseDetails();
   }
@@ -43,18 +49,28 @@ export class AdminComponent implements OnInit {
     if (this.phaseDetails[0].phase == 1 && this.phaseDetails[0].action == 'TO BE STARTED') {
       this.resetPhaseVar.phase = 1;
       this.resetPhaseVar.action = 'IN PROGRESS';
+      this.actionSTart = 'STOP';
+      this.phaseNumber = 1;
     } else if (this.phaseDetails[0].phase == 1 && this.phaseDetails[0].action == 'IN PROGRESS') {
+      this.actionSTart = 'START';
       this.resetPhaseVar.phase = 1;
       this.resetPhaseVar.action = 'STOPPED';
+      this.phaseNumber = 2;
     } else if (this.phaseDetails[0].phase == 1 && this.phaseDetails[0].action == 'STOPPED') {
       this.resetPhaseVar.phase = 2;
       this.resetPhaseVar.action = 'IN PROGRESS';
+      this.actionSTart = 'STOP';
+      this.phaseNumber = 2;
       this.projService.delEvalScoresForph2().subscribe();
     } else if (this.phaseDetails[0].phase == 2 && this.phaseDetails[0].action == 'IN PROGRESS') {
       this.resetPhaseVar.phase = 2;
       this.resetPhaseVar.action = 'STOPPED';
+      this.actionSTart = 'PUBLISH';
+      this.phaseNumber = 2;
     } else if (this.phaseDetails[0].phase == 2 && this.phaseDetails[0].action == 'STOPPED') {
-      alert('Final Results Available');
+      this.actionSTart = 'START';
+      alert('Final Results are Published');
+      this.resetPhase();
     }
 
     this.projService.updatePhaseDetails(this.resetPhaseVar).subscribe();
@@ -72,6 +88,7 @@ export class AdminComponent implements OnInit {
   resetPhase() {
     const self = this;
     this.resetPhaseVar.phase = 1;
+    this.phaseNumber = 1;
     this.resetPhaseVar.action = 'TO BE STARTED';
     this.projService.updatePhaseDetails(this.resetPhaseVar).subscribe();
     setTimeout(function() {

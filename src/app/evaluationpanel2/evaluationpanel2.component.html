@@ -248,23 +248,29 @@
         </ngx-gauge>
         <div style="display: flex;
           justify-content: center;">
-          <div *ngIf="!isSubmit" style="    margin-right: 2%;
-          min-height: 40px;
-          min-width: 80px;">
-            <button *ngIf="isSubmit===null"  mat-raised-button color="primary" (click)="saveScore(false)">SAVE</button>
-            <button *ngIf="isSubmit===false" mat-raised-button color="primary" style="background-color: darkcyan" (click)="saveScore(true)">UPDATE</button>
-          </div>
-          <!-- Button trigger modal -->
-          <!--          <div style="min-height: 40px;min-width: 80px;">-->
-          <!--          <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
-          <!--            Submit-->
-          <!--          </button>-->
+          <!--          <div *ngIf="!isSubmit" style="    margin-right: 2%;-->
+          <!--          min-height: 40px;-->
+          <!--          min-width: 80px;">-->
+          <!--            <button *ngIf="isSubmit===null"  mat-raised-button color="primary" (click)="saveScore(false)">SAVE</button>-->
+          <!--            <button *ngIf="isSubmit===false" mat-raised-button color="primary" style="background-color: darkcyan" (click)="saveScore(true)">UPDATE</button>-->
           <!--          </div>-->
         </div>
-        <div style="min-height: 40px;min-width: 80px;">
-          <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Submit
-          </button>
+        <div class="row">
+          <div class="col-sm-2" style="margin-left: 33%">
+            <div style="min-height: 40px;min-width: 80px;">
+              <button *ngIf="!isSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Submit
+              </button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div *ngIf="!isSubmit" style="    margin-right: 2%;
+          min-height: 40px;
+          min-width: 80px;">
+              <button *ngIf="isSubmit===null"  mat-raised-button color="primary" (click)="saveScore(false)">SAVE</button>
+              <button *ngIf="isSubmit===false" mat-raised-button color="primary" style="background-color: darkcyan" (click)="saveScore(true)">UPDATE</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

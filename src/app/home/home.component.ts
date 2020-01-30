@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   firstName: string;
   lastName: string;
   userID: number;
+  ideaSelected = false;
 
   batchVisible = false;
   alertCount = 0;
@@ -112,6 +113,11 @@ export class HomeComponent implements OnInit {
             self.alertCount ++;
             return true;
           }
+          if (val.statusID === 5) {
+          self.alertCount ++;
+          self.ideaSelected =  true;
+          return true;
+        }
         });
 
       if (self.alertCount !== 0) { self.batchVisible =  true; }
