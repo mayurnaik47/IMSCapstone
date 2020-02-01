@@ -111,6 +111,10 @@ export class ProjectService {
     return this.http.post<IdeaModel>('http://localhost:3000/routeIdea/', idea, httpOptions);
   }
 
+  addNewIdeaType(idea: IdeaType): Observable<IdeaType> {
+    return this.http.post<IdeaType>('http://localhost:3000/routeType/', idea, httpOptions);
+  }
+
   addNewRatingsByUserIdeaID(rating: IdeaEvaluation): Observable<IdeaEvaluation> {
     return this.http.post<IdeaEvaluation>('http://localhost:3000/routeIdeaEvaluation/', rating, httpOptions);
   }
@@ -145,6 +149,10 @@ export class ProjectService {
 
   delEvalScoresForph2(): Observable<IdeaEvaluation> {
     return this.http.delete<IdeaEvaluation>('http://localhost:3000/routeIdeaEvaluation/2' ,  httpOptions);
+  }
+
+  delIdeaType(idType: IdeaType): Observable<IdeaType> {
+    return this.http.delete<IdeaType>('http://localhost:3000/routeType/deleteType/' + idType.typeID ,  httpOptions);
   }
 
   checkIfLoggedIn() {

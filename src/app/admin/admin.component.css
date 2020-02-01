@@ -1,11 +1,4 @@
-.homeimage {
-  position: fixed;
-  background: url(../../assets/images/idea.png) no-repeat;
-  opacity: 1;
-  background-size: cover;
-  min-width: 100%;
-  min-height: 100%;
-}
+
 li {
   margin-left: 3px;
   color: white !important;
@@ -52,27 +45,13 @@ nav {
   background-color: black !important;
 }
 
-.btn {
-  padding: 7%;
-  font-size: inherit !important;
-  border: none;
-}
+
 
 .form-control-lg {
   font-size: initial !important;
 }
 
-.btn-primary {
-  max-width: 100px;
-  min-height: 40px;
-  background: #051a1e;
-  outline: none;
-  border: none;
-  padding: 10%;
-  display: inline-flex;
-  width: 40px;
-  justify-content: center;
-}
+
 
 .btn-primary:hover {
   color: black;

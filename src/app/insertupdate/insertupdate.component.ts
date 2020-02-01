@@ -19,6 +19,7 @@ export class InsertupdateComponent implements OnInit {
   isType = false;
   maxId: number;
   ideaTypes: IdeaType[];
+  fieldsIsValid = false;
 
 
   constructor(private projectService: ProjectService) { }
@@ -54,6 +55,7 @@ export class InsertupdateComponent implements OnInit {
 
       if (!this.isEsttime && !this.isType && !this.isDesc && !this.isTitle) {
 
+        this.fieldsIsValid = true;
         // tslint:disable-next-line:radix
         this.newIdea.usersID = parseInt(sessionStorage.getItem('usersID'));
         this.newIdea.statusID = 1;
@@ -76,10 +78,10 @@ export class InsertupdateComponent implements OnInit {
 
         );
 
-        // tslint:disable-next-line:only-arrow-functions
-        setTimeout(function() {
-          alert("Idea has been inserted successfully..Node the idea ID"+self.maxId);
-        },500);
+        // // tslint:disable-next-line:only-arrow-functions
+        // setTimeout(function() {
+        //   alert("Idea has been inserted successfully..Node the idea ID"+self.maxId);
+        // },500);
 
 
 

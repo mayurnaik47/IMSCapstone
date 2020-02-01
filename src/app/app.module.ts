@@ -18,6 +18,8 @@ import {
   MatBadgeModule,
   MatCardModule,
   MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   MatIconModule,
   MatInputModule,
   MatPaginatorModule, MatProgressSpinnerModule,
@@ -36,7 +38,7 @@ import {FileserviceService} from './services/fileservice.service';
 import { Idearankingph2Component } from './idearankingph2/idearankingph2.component';
 
 const appRoute: Routes = [
-    { path: 'login' , component : HomeComponent},
+  { path: 'login' , component : HomeComponent},
   { path: 'home' , component : HomeComponent},
   { path: 'evalphase1' , component : EvaluationComponent},
   { path: 'evalphase2' , component : Evaluationph2Component},
@@ -86,10 +88,13 @@ const appRoute: Routes = [
     MatBadgeModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgxGaugeModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    FileUploadModule
+    FileUploadModule,
+    MatDatepickerModule
   ],
   providers: [ProjectService,
               FileserviceService

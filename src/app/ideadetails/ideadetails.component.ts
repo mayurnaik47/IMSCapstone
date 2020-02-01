@@ -2,6 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ProjectService} from '../services/project.service';
 import {IdeaFeedback, IdeaModel, IdeaType} from '../models/project.model';
+import {Location} from '@angular/common';
 import {FileUploader} from 'ng2-file-upload';
 
 const uri = 'http://localhost:3000/file/upload';
@@ -24,7 +25,7 @@ export class IdeadetailsComponent implements OnInit {
   attachmentList: any = [];
 
 
-  constructor(private projService: ProjectService, private route: ActivatedRoute) {
+  constructor(private projService: ProjectService, private route: ActivatedRoute, private location: Location) {
 
     this.uploader.onCompleteItem = (item: any, response: any , status: any, headers: any) => {
       this.attachmentList.push(JSON.parse(response));
@@ -79,6 +80,10 @@ export class IdeadetailsComponent implements OnInit {
        });
 
    }
+
+  goBack() {
+    this.location.back();
+  }
 
   updateIdea() {
     const self = this;

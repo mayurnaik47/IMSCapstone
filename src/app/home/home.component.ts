@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
       },
       () => {
       this.alertIdeas =  this.alertIdeas.filter(function(val) {
-          if (val.statusID === 9) {
+          if (val.statusID === 3) {
             self.alertCount ++;
             return true;
           }

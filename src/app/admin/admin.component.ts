@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
-import {Phase} from '../models/project.model';
+import {IdeaType, Phase} from '../models/project.model';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +15,13 @@ export class AdminComponent implements OnInit {
   firstName: string;
   lastName: string;
   actionSTart = 'START';
-  phaseNumber: number;
+  phaseNumber = 1;
+
+  newIdeatype: IdeaType;
+  delIdeatype: IdeaType;
+  validTypeid= true;
+
+  ideaTypes: IdeaType[];
 
   // spinner
   color = 'primary';
@@ -27,10 +33,21 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.newIdeatype = new IdeaType();
+    this.delIdeatype = new IdeaType();
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
     this.resetPhaseVar = new Phase();
     this.getPhaseDetails();
+    this.getAllIdeaTypes();
+  }
+
+  getAllIdeaTypes() {
+    this.projService.getAllIdeaTypes().subscribe(
+      ideaTypes => {
+        this.ideaTypes = ideaTypes;
+      }
+    );
   }
 
   getPhaseDetails() {
@@ -97,13 +114,28 @@ export class AdminComponent implements OnInit {
 
   }
 
-  getAllSelectedIdeasPhase1() {
-
-
-
-
-
+  addIdeaType() {
+    this.projService.addNewIdeaType(this.newIdeatype).subscribe(
+      () => {},
+      () => {},
+      () => {
+        this.getAllIdeaTypes();
+      }
+    );
   }
 
+  deleteType() {
+    if (this.delIdeatype.typeID === -1) { this.validTypeid = false; }
+
+    if (this.validTypeid) {
+      this.projService.delIdeaType(this.delIdeatype).subscribe(
+        () => {},
+        () => {},
+        () => {
+          this.getAllIdeaTypes();
+        }
+      );
+    }
+  }
 
 }

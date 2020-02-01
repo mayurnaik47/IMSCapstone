@@ -8,7 +8,7 @@
   <div class="navbar-collapse" id="navbarsExample03">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link"  routerLink="/login">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link"  routerLink="/home">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link"  routerLink="/myideas">My Ideas
@@ -63,4 +63,92 @@
     </div>
   </div>
 </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+
+    <div class="form form-insert" >
+    <div class="form-group form-row">
+      <label for="type1" class="col-sm-3 col-form-label">Idea Type: </label>
+      <div class="col-sm-4">
+        <select class="form-control" id="type1" [(ngModel)]="delIdeatype.typeID">
+          <option [value]="-1">Select</option>
+          <option [value]="ideaName.typeID" *ngFor="let ideaName of ideaTypes">{{ideaName.name}}</option>
+        </select>
+        <div class="error-form" *ngIf="!validTypeid">*Idea type is required</div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="example-button-row col-md-3">
+      <button mat-raised-button color="primary"  data-toggle="modal" data-target="#addmodaltype">ADD</button>
+    </div>
+    <div class="example-button-row col-md-4">
+      <button mat-raised-button color="accent"  data-toggle="modal" data-target="#exampleModalCenterrr">DELETE</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Submit Modal  -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenterrr" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteType()">DELETE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal for insert -->
+
+<!-- Modal -->
+<div class="modal fade" id="addmodaltype" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Enter Idea Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form form-insert" >
+          <div class="form-group form-row">
+            <label for="ideatitle1" class="col-sm-3 col-form-label">Idea Type: </label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="ideatitle1" [(ngModel)]="newIdeatype.name"  placeholder="Idea Type">
+              <!--              <div class="error-form" *ngIf="isTitle">*Title is Required</div>-->
+            </div>
+          </div>
+
+          <div class="form-group form-row" style="margin-top: 35px">
+            <button type="submit" (click)="addIdeaType()" data-dismiss = 'modal'  class="btn btn-primary col-sm-2" style="max-width: 100px;max-height: 50px">INSERT</button>
+          </div>
+        </div>
+      </div> <!-- Modal body ends-->
+      <!--      <div class="modal-footer">-->
+      <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+      <!--        <button type="button" (click)="addStudentRequest()" [attr.data-dismiss]="projectsDetailsStatus? 'modal' : null" class="btn btn-primary">Submit</button>-->
+      <!--      </div>-->
+    </div>
+  </div>
 </div>
