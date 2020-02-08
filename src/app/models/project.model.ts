@@ -53,6 +53,8 @@ export  class IdeaCriteria {
   critID: number;
   name: string;
   rating: number;
+  isActive: number;
+  phase: number;
 }
 
 export  class IdeaStatus {

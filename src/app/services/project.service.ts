@@ -54,7 +54,6 @@ export class ProjectService {
   }
 
   updatePhaseDetails(phase: Phase): Observable<IdeaEvaluation> {
-    console.log(phase);
     return this.http.put<IdeaEvaluation>('http://localhost:3000/routePublic/phase/' + phase.phase + '?action=' + phase.action , phase, httpOptions);
   }
 
@@ -72,6 +71,10 @@ export class ProjectService {
 
   getIdeaCriteriasByPhase(phase: number): Observable<IdeaCriteria[]> {
     return this.http.get<IdeaCriteria[]>('http://localhost:3000/routeIdeaCriteria/getCriteria/' + phase);
+  }
+
+  getAllCriterByPhase(phase: number): Observable<IdeaCriteria[]> {
+    return this.http.get<IdeaCriteria[]>('http://localhost:3000/routeIdeaCriteria/getAll/' + phase);
   }
 
   getIdeaCommentsByIdeaID(ideaID: number): Observable<IdeaFeedback[]> {
@@ -111,6 +114,10 @@ export class ProjectService {
     return this.http.post<IdeaModel>('http://localhost:3000/routeIdea/', idea, httpOptions);
   }
 
+  addNewIdeaCriteria(ideaCriteria: IdeaCriteria): Observable<IdeaCriteria> {
+    return this.http.post<IdeaCriteria>('http://localhost:3000/routeIdeaCriteria/', ideaCriteria, httpOptions);
+  }
+
   addNewIdeaType(idea: IdeaType): Observable<IdeaType> {
     return this.http.post<IdeaType>('http://localhost:3000/routeType/', idea, httpOptions);
   }
@@ -137,6 +144,10 @@ export class ProjectService {
 
   updateIdeaStatus(idea: IdeaModel): Observable<IdeaModel> {
     return this.http.put<IdeaModel>('http://localhost:3000/routeIdea/' + idea.ideaID + '?updateAttr=statusID', idea, httpOptions);
+  }
+
+  updateIdeaCriteria(idea: IdeaCriteria): Observable<IdeaCriteria> {
+    return this.http.put<IdeaCriteria>('http://localhost:3000/routeIdeaCriteria/' + idea.critID , idea, httpOptions);
   }
 
   updateIdea(idea: IdeaModel): Observable<IdeaModel> {

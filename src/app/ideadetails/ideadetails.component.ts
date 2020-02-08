@@ -88,18 +88,19 @@ export class IdeadetailsComponent implements OnInit {
   updateIdea() {
     const self = this;
     this.validData = true;
-    if (this.ideaDetails[0].typeID == -1) {
+    if (this.ideaDetails[0].typeID === -1) {
       this.isType = true;
       this.validData = false;
     }
     if (this.validData) {
-     this.projService.updateIdea(this.ideaDetails[0]).subscribe();
-     alert('Record updated successfully');
-
-     setTimeout(function() {
-       self.getIdeaByIdeaId(self.ideaId);
-
-     },500);
+     this.projService.updateIdea(this.ideaDetails[0]).subscribe(
+       () => {},
+       () => {},
+       () => {
+         alert('Record updated successfully');
+         self.getIdeaByIdeaId(self.ideaId);
+       }
+     );
     }
   }
 }

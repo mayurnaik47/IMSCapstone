@@ -23,7 +23,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatPaginatorModule, MatProgressSpinnerModule,
-  MatSliderModule, MatSortModule
+  MatSliderModule, MatSortModule, MatRadioModule
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { IdeadetailsComponent } from './ideadetails/ideadetails.component';
@@ -94,7 +94,8 @@ const appRoute: Routes = [
     MatSortModule,
     MatProgressSpinnerModule,
     FileUploadModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatRadioModule
   ],
   providers: [ProjectService,
               FileserviceService

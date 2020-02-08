@@ -39,61 +39,118 @@
 
 <!--end of navigation-->
 
-<div class="container" *ngIf="phaseDetails">
-<div class="row" style="padding: 3%;padding-top: 2%">
-  <div class="col-md-5">
+<div class="container" style="display: flex; margin-top: 10%" *ngIf="phaseDetails">
+<div class="row" style="padding: 3%;padding-top: 2%; display: block;     box-shadow: 1px 3px 12px;">
+  <div class="col-md-10">
 <!--    <mat-progress-spinner *ngIf="!"-->
 <!--      class="example-margin"-->
 <!--      [color]="color"-->
 <!--      [mode]="mode"-->
 <!--      [value]="value">-->
 <!--    </mat-progress-spinner>-->
-    <p><b>Current Phase:</b> {{phaseDetails[0].phase}}</p>
-    <p><b>Status: </b>{{phaseDetails[0].action}} </p>
+    <p style="min-width: 250px"><b>Current Phase:</b> {{phaseDetails[0].phase}}</p>
+    <p style="min-width: 250px"><b>Status: </b>{{phaseDetails[0].action}} </p>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-10">
     <h5>Phase {{phaseNumber}} Evaluation</h5>
-    <div class="row">
+    <div class="row" style="margin-top: 10%">
   <div class="example-button-row col-md-3">
     <button mat-raised-button color="primary" (click)="doEvaluateAction()">{{actionSTart}}</button>
   </div>
-    <div class="example-button-row col-md-4">
+    <div class="example-button-row col-md-4" style="margin-left: 10%">
       <button mat-raised-button color="accent" (click)="resetPhase()">RESET</button>
     </div>
     </div>
   </div>
 </div>
-</div>
 
+  <div class="container" style="    box-shadow: 1px 3px 12px;
+    margin-left: 5%;">
+    <div class="row" style="margin-top: 5%; display: flex;justify-content: center; ">
+      <div class="form form-insert" >
+        <div class="form-group form-row">
+          <label for="type1" class="col-sm-4 col-form-label">Idea Type: </label>
+          <div class="col-sm-4">
+            <select class="form-control" id="type1" style="min-width: 180px" [(ngModel)]="delIdeatype.typeID">
+              <option [value]="-1">Select</option>
+              <option [value]="ideaName.typeID" *ngFor="let ideaName of ideaTypes">{{ideaName.name}}</option>
+            </select>
+            <div class="error-form" *ngIf="!validTypeid">*Idea type is required</div>
+          </div>
+        </div>
+      </div>
 
-<div class="container">
-  <div class="row">
+    </div>
 
-    <div class="form form-insert" >
-    <div class="form-group form-row">
-      <label for="type1" class="col-sm-3 col-form-label">Idea Type: </label>
-      <div class="col-sm-4">
-        <select class="form-control" id="type1" [(ngModel)]="delIdeatype.typeID">
-          <option [value]="-1">Select</option>
-          <option [value]="ideaName.typeID" *ngFor="let ideaName of ideaTypes">{{ideaName.name}}</option>
-        </select>
-        <div class="error-form" *ngIf="!validTypeid">*Idea type is required</div>
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="example-button-row col-md-1">
+        <button mat-raised-button color="primary"  data-toggle="modal" data-target="#addmodaltype">ADD</button>
+      </div>
+      <div class="example-button-row col-md-1" style="margin-left: 12%">
+        <button mat-raised-button color="accent"  data-toggle="modal" data-target="#exampleModalCenterrr">DELETE</button>
       </div>
     </div>
-    </div>
 
   </div>
 
-  <div class="row">
-    <div class="example-button-row col-md-3">
-      <button mat-raised-button color="primary"  data-toggle="modal" data-target="#addmodaltype">ADD</button>
+  <div class="container" style="box-shadow: 1px 3px 12px;
+    margin-left: 5%;">
+    <div class="row" style="margin: 3%">
+      <label>Insert/Delete Evaluation Criteria</label>
     </div>
-    <div class="example-button-row col-md-4">
-      <button mat-raised-button color="accent"  data-toggle="modal" data-target="#exampleModalCenterrr">DELETE</button>
+    <div class="row" style="margin-top: 5%; display: flex;justify-content: center">
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="criteriaPhase" (change)="getIdeasByPhase()">
+        <mat-radio-button value = 1>Phase 1</mat-radio-button>
+        <mat-radio-button value = 2>Phase 2</mat-radio-button>
+      </mat-radio-group>
     </div>
+
+    <div class="row">
+      <div class="form form-insert" >
+        <div class="form-group form-row">
+          <label for="type1" class="col-sm-4 col-form-label">Idea Type: </label>
+          <div class="col-sm-4">
+            <select  class="form-control" id="criteriaPh" style="min-width: 180px" [(ngModel)]="selectedCriteria.name" (change)="getIsActiveStatus($event)">
+              <option [value]="'select'">Select</option>
+              <option  [value]="element.name" [attr.data-isactive]="element.isActive" [attr.data-cridid]="element.critID" *ngFor="let element of criteria">{{element.name}}</option>
+            </select>
+            <div class="error-form" *ngIf="!validCriteria">*Critera ID is required</div>
+          </div>
+        </div>
+      </div>
+
   </div>
 
+    <div class="row">
+      <div class="form form-insert" >
+        <div class="form-group form-row">
+          <label for="status" class="col-sm-4 col-form-label">Status</label>
+          <div class="col-sm-3">
+            <select class="form-control" id="status" style="min-width: 180px" [(ngModel)]="selectedIsActive.isActive">
+              <option [value]="-1">Select</option>
+              <option [value]=0>InActive</option>
+              <option [value]=1>Active</option>
+            </select>
+            <div class="error-form" *ngIf="!validCriteria">*Critera ID is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="display: flex;justify-content: center">
+      <div class="example-button-row col-md-1">
+        <button mat-raised-button color="primary"  data-toggle="modal" data-target="#addmodalcrittypecrit">ADD</button>
+      </div>
+      <div class="example-button-row col-md-1" style="margin-left: 12%">
+        <button mat-raised-button color="accent"  data-toggle="modal" data-target="#exampleModalCenterrr2">UPDATE</button>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+
+
 
 
 <!-- Submit Modal  -->
@@ -116,6 +173,25 @@
   </div>
 </div>
 
+<!--
+Modal-->
+
+<div class="modal fade" id="exampleModalCenterrr2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateStatus()">UPDATE</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal for insert -->
 
@@ -152,3 +228,59 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal Idea Type-->
+<div class="modal fade" id="addmodalcrittypecrit" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Please Enter Idea Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form form-insert" >
+          <div class="form-group form-row">
+            <label for="ideatitle1" class="col-sm-3 col-form-label">Criteria Name: </label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="ideatitle" [(ngModel)]="newInsertCriteria.name"  placeholder="Criteria Name">
+              <!--              <div class="error-form" *ngIf="isTitle">*Title is Required</div>-->
+            </div>
+          </div>
+
+          <div class="form-group form-row">
+            <label for="status3" class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-3">
+              <select class="form-control" id="status3" style="min-width: 180px" [(ngModel)]="newInsertCriteria.isActive">
+                <option [value]="-1">Select</option>
+                <option [value]=0>InActive</option>
+                <option [value]=1>Active</option>
+              </select>
+              <div class="error-form" *ngIf="!validCriteria">*Critera ID is required</div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5%; display: flex;justify-content: center">
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="newInsertCriteria.phase">
+              <mat-radio-button value = 1>Phase 1</mat-radio-button>
+              <mat-radio-button value = 2>Phase 2</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+
+          <div class="form-group form-row" style="margin-top: 35px">
+            <button type="submit" (click)="insertNewCriteria()" data-dismiss = 'modal'  class="btn btn-primary col-sm-2" style="max-width: 100px;max-height: 50px">INSERT</button>
+          </div>
+        </div>
+      </div> <!-- Modal body ends-->
+      <!--      <div class="modal-footer">-->
+      <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+      <!--        <button type="button" (click)="addStudentRequest()" [attr.data-dismiss]="projectsDetailsStatus? 'modal' : null" class="btn btn-primary">Submit</button>-->
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
-import {IdeaType, Phase} from '../models/project.model';
+import {IdeaCriteria, IdeaType, Phase} from '../models/project.model';
 
 @Component({
   selector: 'app-admin',
@@ -16,10 +16,17 @@ export class AdminComponent implements OnInit {
   lastName: string;
   actionSTart = 'START';
   phaseNumber = 1;
+  criteria: IdeaCriteria[];
+  selectedCriteria: IdeaCriteria;
+  selectedIsActive: IdeaCriteria;
+  updateCriteria: IdeaCriteria;
+  newInsertCriteria: IdeaCriteria;
+  criteriaPhase = 1;
 
   newIdeatype: IdeaType;
   delIdeatype: IdeaType;
-  validTypeid= true;
+  validTypeid = true;
+  validCriteria = true;
 
   ideaTypes: IdeaType[];
 
@@ -35,11 +42,18 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.newIdeatype = new IdeaType();
     this.delIdeatype = new IdeaType();
+    this.delIdeatype.typeID = -1;
+    this.selectedCriteria = new IdeaCriteria();
+    this.selectedCriteria.name = 'select';
+    this.selectedIsActive = new IdeaCriteria();
+    this.newInsertCriteria = new IdeaCriteria();
+    this.updateCriteria = new IdeaCriteria();
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
     this.resetPhaseVar = new Phase();
     this.getPhaseDetails();
     this.getAllIdeaTypes();
+    this.getIdeasByPhase();
   }
 
   getAllIdeaTypes() {
@@ -122,6 +136,42 @@ export class AdminComponent implements OnInit {
         this.getAllIdeaTypes();
       }
     );
+  }
+
+  updateStatus() {
+    this.updateCriteria.isActive =   this.selectedIsActive.isActive;
+    this.projService.updateIdeaCriteria(this.updateCriteria).subscribe(
+      () => {},
+      () => {},
+      () => {
+        this.getIdeasByPhase();
+      }
+    );
+  }
+
+  insertNewCriteria() {
+     this.projService.addNewIdeaCriteria(this.newInsertCriteria).subscribe();
+
+  }
+
+  getIsActiveStatus(event) {
+    const selectedIndex: number = event.target.selectedIndex;
+    this.updateCriteria.name = event.target.value;
+    this.selectedIsActive.isActive = event.target.options[selectedIndex].getAttribute('data-isactive');
+    this.updateCriteria.isActive =   this.selectedIsActive.isActive;
+    this.updateCriteria.critID = event.target.options[selectedIndex].getAttribute('data-cridid');
+    this.updateCriteria.phase = this.criteriaPhase;
+
+  }
+
+  getIdeasByPhase() {
+
+    this.projService.getAllCriterByPhase(this.criteriaPhase).subscribe(
+      ideaCriterias => {
+        this.criteria = ideaCriterias;
+      }, () => {} , () => {
+
+      });
   }
 
   deleteType() {

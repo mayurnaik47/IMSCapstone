@@ -128,6 +128,7 @@ var Idea= {
         console.log("'Error connecting to Db'")};
       return;
     });
+    console.log(idea);
 
     if(updateAttr=='statusID')
       res = db.query("update Idea set  statusID=? where ideaID=?",[idea.statusID, id],callback);
@@ -135,7 +136,7 @@ var Idea= {
       res = db.query("update Idea set  docName=? where ideaID=?",[idea.docName, id],callback);
     else if (updateAttr=='all')
       res = db.query("update Idea set  title=? , description=? , estTime = ?, cost = ? , typeID=?  , docName=?" +
-        "where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, idea.docName, id],callback);
+        " where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, idea.docName, id],callback);
 
     // db.end();
     return res;
