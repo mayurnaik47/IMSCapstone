@@ -54,4 +54,23 @@ router.post('/',function(req,res){
   });
 });
 
+
+// Service defined to delete the idea details
+router.delete('/deleteType/:id',function(req,res){
+
+
+  IdeaType.deleteType(req.params.id,function(err,count){
+
+    if(err)
+    {
+      res.json(err);
+    }
+    else
+    {
+      res.json(count);
+    }
+
+  });
+});
+
 module.exports=router;

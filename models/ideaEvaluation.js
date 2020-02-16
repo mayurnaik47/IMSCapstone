@@ -112,6 +112,20 @@ var IdeaEvaluation= {
     let res = db.query("select * from Evaluators where typeID = ?",[typeID], callback);
 
     return res;
+  },
+
+  deleteScores: function(id,callback){
+
+    db.connect(function (err) {
+      if(err) {console.log(err.code)
+        console.log("'Error connecting to Db'")};
+      return;
+    });
+
+    let res = db.query("delete  from IdeaEvaluation",[id],callback);
+    // db.end();
+    return res;
+
   }
 
 

@@ -40,6 +40,21 @@ var IdeaType= {
     return res;
   },
 
+  deleteType: function(id,callback){
+
+    db.connect(function (err) {
+      if(err) {console.log(err.code)
+        console.log("'Error connecting to Db'")};
+      return;
+    });
+
+    console.log("inter"+ id);
+    let res = db.query("delete from Type where typeID = ?",[id],callback);
+    // db.end();
+    return res;
+
+  },
+
   addNewType:function(newType,callback) {
 
     let maxId = 0;

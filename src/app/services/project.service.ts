@@ -54,7 +54,6 @@ export class ProjectService {
   }
 
   updatePhaseDetails(phase: Phase): Observable<IdeaEvaluation> {
-    console.log(phase);
     return this.http.put<IdeaEvaluation>('http://localhost:3000/routePublic/phase/' + phase.phase + '?action=' + phase.action , phase, httpOptions);
   }
 
@@ -72,6 +71,10 @@ export class ProjectService {
 
   getIdeaCriteriasByPhase(phase: number): Observable<IdeaCriteria[]> {
     return this.http.get<IdeaCriteria[]>('http://localhost:3000/routeIdeaCriteria/getCriteria/' + phase);
+  }
+
+  getAllCriterByPhase(phase: number): Observable<IdeaCriteria[]> {
+    return this.http.get<IdeaCriteria[]>('http://localhost:3000/routeIdeaCriteria/getAll/' + phase);
   }
 
   getIdeaCommentsByIdeaID(ideaID: number): Observable<IdeaFeedback[]> {
@@ -111,6 +114,14 @@ export class ProjectService {
     return this.http.post<IdeaModel>('http://localhost:3000/routeIdea/', idea, httpOptions);
   }
 
+  addNewIdeaCriteria(ideaCriteria: IdeaCriteria): Observable<IdeaCriteria> {
+    return this.http.post<IdeaCriteria>('http://localhost:3000/routeIdeaCriteria/', ideaCriteria, httpOptions);
+  }
+
+  addNewIdeaType(idea: IdeaType): Observable<IdeaType> {
+    return this.http.post<IdeaType>('http://localhost:3000/routeType/', idea, httpOptions);
+  }
+
   addNewRatingsByUserIdeaID(rating: IdeaEvaluation): Observable<IdeaEvaluation> {
     return this.http.post<IdeaEvaluation>('http://localhost:3000/routeIdeaEvaluation/', rating, httpOptions);
   }
@@ -127,8 +138,16 @@ export class ProjectService {
     return this.http.post<IdeaFeedback>('http://localhost:3000/routeFeedback/', comment, httpOptions);
   }
 
+  addNewFiles(formData: FormData): Observable<IdeaFeedback> {
+    return this.http.post<IdeaFeedback>('http://localhost:3000/fileUpload/api/upload', formData, httpOptions);
+  }
+
   updateIdeaStatus(idea: IdeaModel): Observable<IdeaModel> {
     return this.http.put<IdeaModel>('http://localhost:3000/routeIdea/' + idea.ideaID + '?updateAttr=statusID', idea, httpOptions);
+  }
+
+  updateIdeaCriteria(idea: IdeaCriteria): Observable<IdeaCriteria> {
+    return this.http.put<IdeaCriteria>('http://localhost:3000/routeIdeaCriteria/' + idea.critID , idea, httpOptions);
   }
 
   updateIdea(idea: IdeaModel): Observable<IdeaModel> {
@@ -137,6 +156,14 @@ export class ProjectService {
 
   getMaxid(): Observable<MaxID> {
     return this.http.get<MaxID>('http://localhost:3000/routeIdea/maxId/1');
+  }
+
+  delEvalScoresForph2(): Observable<IdeaEvaluation> {
+    return this.http.delete<IdeaEvaluation>('http://localhost:3000/routeIdeaEvaluation/2' ,  httpOptions);
+  }
+
+  delIdeaType(idType: IdeaType): Observable<IdeaType> {
+    return this.http.delete<IdeaType>('http://localhost:3000/routeType/deleteType/' + idType.typeID ,  httpOptions);
   }
 
   checkIfLoggedIn() {

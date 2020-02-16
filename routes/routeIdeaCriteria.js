@@ -12,9 +12,9 @@ var IdeaCriteria=require('../models/ideaCriteria');
 
 //Service defined to retrieve all the Ideas
 
-router.get('/:id?',function(req,res,next) {
+router.get('/getAll/:phase?',function(req,res,next) {
 
-  IdeaCriteria.getAllCriteria(function(err,rows){
+  IdeaCriteria.getAllCriteria(req.params.phase,function(err,rows){
 
     if(err)
     {

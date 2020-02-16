@@ -1,0 +1,75 @@
+
+li {
+  margin-left: 3px;
+  color: white !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: white !important;
+}
+.active {
+  background-color: teal;
+  color: white !important;
+  min-width: 100px;
+  text-align: center;
+  /* border: 1px solid white; */
+}
+
+li:hover {
+  background-color: teal;
+  text-decoration: underline;
+  color: white;
+  font-weight: bold;
+}
+
+.search_bar {
+  margin-top: 12%;
+  background-color: aliceblue;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  margin-bottom: auto;
+  box-shadow: 1px 2px 55px cadetblue;
+}
+
+.welcome {
+  color: white;
+  font-family: fantasy !important;
+  margin: 0;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+nav {
+  background-color: black !important;
+}
+
+
+
+.form-control-lg {
+  font-size: initial !important;
+}
+
+
+
+.btn-primary:hover {
+  color: black;
+  background-color: white;
+  border: 3px solid #051a1e;
+}
+
+.btn-success {
+  background-color: orange;
+  border: none;
+}
+
+.notify-ph {
+  background-color: #FFA500;
+  max-width: 80%;
+  margin: auto;
+  font-size: 16px;
+  border-radius: 40%;
+}

@@ -13,6 +13,9 @@ export class MyideasComponent implements OnInit {
 
   ideas: IdeaModel[];
   userID: number;
+  firstName: string;
+  lastName: string;
+  userType: number;
   displayedColumns: string[] = ['ideaID', 'title', 'typeID', 'statusID'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -23,9 +26,12 @@ export class MyideasComponent implements OnInit {
 
 
   ngOnInit() {
+    this.firstName = sessionStorage.getItem('fName');
+    this.lastName = sessionStorage.getItem('lName');
     // tslint:disable-next-line:radix
-   this.userID = parseInt(sessionStorage.getItem('usersID'));
-   this.initIdeaList();
+    this.userID = parseInt(sessionStorage.getItem('usersID'));
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
+    this.initIdeaList();
 
   }
 

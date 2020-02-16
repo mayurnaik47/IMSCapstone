@@ -41,7 +41,10 @@ router.get('/:id?',function(req,res,next) {
   }
 });
 
-// Search Query
+// REST Controller to search the required Ideas from the database based on User Input.
+// Access Type : GET
+// Path Variable: {id}
+// Query Params: {searchQuery}
 
 router.get('/searchQuery/:id',function(req,res) {
   Idea.getIdeaBySearchQuery(req.query.searchQuery, function (err, rows) {

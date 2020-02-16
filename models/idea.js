@@ -42,7 +42,7 @@ var Idea= {
     return res;
   },
 
-
+// Service layer function having business logic to search the ideas based on filtered query and sort it based on user preferences.
   getIdeaBySearchQuery: function(searchQuery,callback){
 
     db.connect(function (err) {
@@ -56,7 +56,8 @@ var Idea= {
     searchQuery = '('+searchQuery+')';
 
     let res = db.query("SELECT ie.statusID, ie.typeID, ie.ideaID, ie.title, ie.description, ie.estTime, ie.cost, ie.docName,  " +
-      "ie.usersID, tp.name AS  typeName, st.name AS statusName from Idea ie LEFT OUTER JOIN Type tp USING(typeID) LEFT OUTER JOIN Status st USING(statusID) where ie.title REGEXP ?",[searchQuery],callback);
+      "ie.usersID, tp.name AS  typeName, st.name AS statusName from Idea ie LEFT OUTER JOIN Type tp USING(typeID) LEFT OUTER JOIN " +
+      "Status st USING(statusID) where ie.title REGEXP ?",[searchQuery],callback);
 
     return res;
   },
@@ -128,14 +129,15 @@ var Idea= {
         console.log("'Error connecting to Db'")};
       return;
     });
+    console.log(idea);
 
     if(updateAttr=='statusID')
       res = db.query("update Idea set  statusID=? where ideaID=?",[idea.statusID, id],callback);
     else if (updateAttr=='docName')
       res = db.query("update Idea set  docName=? where ideaID=?",[idea.docName, id],callback);
     else if (updateAttr=='all')
-      res = db.query("update Idea set  title=? , description=? , estTime = ?, cost = ? , typeID=?  " +
-        " where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, id],callback);
+      res = db.query("update Idea set  title=? , description=? , estTime = ?, cost = ? , typeID=?  , docName=?" +
+        " where ideaID=?",[idea.title, idea.description, idea.estTime, idea.cost, idea.typeID, idea.docName, id],callback);
 
     // db.end();
     return res;

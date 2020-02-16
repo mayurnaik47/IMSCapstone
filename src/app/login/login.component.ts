@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem("fName", this.users[0].fName);
               sessionStorage.setItem("lName", this.users[0].lName);
               sessionStorage.setItem("usersID", this.users[0].usersID);
+              sessionStorage.setItem("usersType", this.users[0].uType);
               this.firstName = sessionStorage.getItem("fName");
               this.lastName = sessionStorage.getItem("lName");
               sessionStorage.setItem("loggedin", this.loggedIn.toString());

@@ -5,7 +5,7 @@
       <h1 class="grad text-center textformat">
         Innovation Management System
       </h1>
-      <button class="col-md-4" type="submit" class="btn-primary" id="btnLogin" (click)="logout()">Log Out</button>
+      <button *ngIf="firstName!=null" class="col-md-4" type="submit" class="btn-primary" id="btnLogin" (click)="logout()">Log Out</button>
     </div>
   </div>
 </div>

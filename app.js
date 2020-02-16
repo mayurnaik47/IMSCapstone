@@ -21,6 +21,7 @@ var routeIdeaCriteria = require('./routes/routeIdeaCriteria');
 var routePublic=require('./routes/routePublic');
 var routeStatus=require('./routes/routeStatus');
 var routeIdeaEvaluation=require('./routes/routeIdeaEvaluation');
+var file=require('./routes/file');
 var app = express();
 
 //Initialising the server parameters.
@@ -40,6 +41,7 @@ app.use('/routeIdeaCriteria',routeIdeaCriteria);
 app.use('/routePublic',routePublic);
 app.use('/routeStatus',routeStatus);
 app.use('/routeIdeaEvaluation',routeIdeaEvaluation);
+app.use('/file',file);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ProjectService} from '../services/project.service';
 import {IdeaModel} from '../models/project.model';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,17 @@ export class HomeComponent implements OnInit {
   searchClicked = false;
   keyWordExists = false;
   ideas: IdeaModel[];
+  alertIdeas: IdeaModel[];
   invalidQuery = false;
   noRecords = false;
   firstName: string;
   lastName: string;
+  userID: number;
+  userType: number;
+  ideaSelected = false;
+
+  batchVisible = false;
+  alertCount = 0;
 
 
   constructor(private projService: ProjectService, private route: Router) { }
@@ -25,6 +33,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
+    this.userID = parseInt(sessionStorage.getItem('usersID'));
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
 
     // save phase details in session storage
     this.projService.getPhaseDetails().subscribe(
@@ -33,6 +43,7 @@ export class HomeComponent implements OnInit {
         sessionStorage.setItem('phaseAction', phase[0].action);
       }
     );
+    this.countAlertNotification();
   }
 
   processSearchQuery(query, showAll) {
@@ -85,6 +96,35 @@ export class HomeComponent implements OnInit {
       );
 
     }
+  }
+
+  countAlertNotification() {
+
+    const self = this;
+
+    this.projService.getIdeasByUsers(this.userID).subscribe(
+      ideas => {
+        this.alertIdeas = ideas;
+      },
+      () => {
+        console.log('Cant fetch getIdeasByUsers');
+      },
+      () => {
+      this.alertIdeas =  this.alertIdeas.filter(function(val) {
+          if (val.statusID === 3) {
+            self.alertCount ++;
+            return true;
+          }
+          if (val.statusID === 5) {
+          self.alertCount ++;
+          self.ideaSelected =  true;
+          return true;
+        }
+        });
+
+      if (self.alertCount !== 0) { self.batchVisible =  true; }
+      }
+    );
   }
 
   insertNewidea() {

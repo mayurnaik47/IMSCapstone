@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IdeaModel} from '../models/project.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ProjectService} from '../services/project.service';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-searchresults',
@@ -13,8 +15,12 @@ export class SearchresultsComponent implements OnInit {
   searchQuery: string;
   showall: string;
   ideas: IdeaModel[];
+  lastName: string;
+  displayedColumns: string[] = ['ideaID', 'title', 'typeID', 'description'];
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  private dataSource: MatTableDataSource<IdeaModel>;
 
-  constructor(private projService: ProjectService, private route: ActivatedRoute) {
+  constructor(private projService: ProjectService, private route: ActivatedRoute, private location: Location) {
 
   }
 
@@ -38,8 +44,16 @@ export class SearchresultsComponent implements OnInit {
 
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  goBack() {
+    this.location.back();
+  }
 
   processQuery() {
+    const self = this;
     if (!this.searchQuery && this.showall === 'false') {
 
       return;
@@ -58,6 +72,11 @@ export class SearchresultsComponent implements OnInit {
       this.projService.getAllIdeasId().subscribe(
         ideas => {
           this.ideas = ideas;
+        },
+        () => {},
+        () => {
+          this.dataSource = new MatTableDataSource<IdeaModel>(self.ideas);
+          this.dataSource.paginator = self.paginator;
         }
       );
 
@@ -70,7 +89,8 @@ export class SearchresultsComponent implements OnInit {
         },
         error => console.log('Error: ' + error),
         () => {
-
+          this.dataSource = new MatTableDataSource<IdeaModel>(self.ideas);
+          this.dataSource.paginator = self.paginator;
         }
       );
 

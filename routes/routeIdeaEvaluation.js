@@ -108,6 +108,23 @@ router.get('/getEvaluatorsByType/:id?',function(req,res,next) {
   });
 });
 
+// Service defined to delete the idea details
+router.delete('/:id',function(req,res,next){
+
+  IdeaEvaluation.deleteScores(req.params.id,function(err,count){
+
+    if(err)
+    {
+      res.json(err);
+    }
+    else
+    {
+      res.json(count);
+    }
+
+  });
+});
+
 
 
 

@@ -22,7 +22,15 @@
      <div class="form-group form-row">
        <label for="esttime" class="col-sm-2 col-form-label">Estimated Time: </label>
        <div class="col-sm-2">
-         <input type="text" class="form-control" id="esttime" [(ngModel)]="newIdea.estTime" placeholder="MM/DD/YYYY" >
+<!--         <mat-form-field>-->
+<!--           <input id="esttime" type="date" matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newIdea.estTime">-->
+<!--           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--           <mat-datepicker #picker></mat-datepicker>-->
+<!--         </mat-form-field>-->
+
+
+
+         <input type="date" class="form-control" id="esttime" [(ngModel)]="newIdea.estTime" placeholder="MM/DD/YYYY" >
          <div class="error-form" *ngIf="isEsttime">*Please enter estimated time</div>
        </div>
      </div>
@@ -30,7 +38,7 @@
      <div class="form-group form-row">
        <label for="cost" class="col-sm-2 col-form-label">Estimated cost: </label>
        <div class="col-sm-2">
-         <input type="text" class="form-control" id="cost" [(ngModel)]="newIdea.cost" placeholder="e.g. 1000$">
+         <input type="number" class="form-control" id="cost" [(ngModel)]="newIdea.cost" placeholder="e.g. 1000$">
        </div>
      </div>
 
@@ -51,7 +59,7 @@
        <label for="uploadproposal">Upload detailed proposal: </label>
        <input type="file" class="form-control-file" id="uploadproposal" [(ngModel)]="newIdea.docName">
        </div>
-       <button type="submit" (click)="addNewIdea()"  data-toggle='modal' data-target="#insertIdea" class="btn btn-primary col-sm-2" style="max-width: 100px;max-height: 50px">Submit</button>
+       <button type="submit" (click)="addNewIdea()" [attr.data-toggle]="fieldsIsValid?'modal':null" data-target="#insertIdea" class="btn btn-primary col-sm-2" style="max-width: 100px;max-height: 50px">Submit</button>
      </div>
 
 

@@ -10,7 +10,7 @@ var db=require('../dbconnection'); //reference of dbconnection.js
 
 var IdeaCriteria= {
 
-  getAllCriteria: function(callback){
+  getAllCriteria: function(phase, callback){
 
     db.connect(function (err) {
       if(err) {
@@ -20,7 +20,7 @@ var IdeaCriteria= {
       }
     });
 
-    let res = db.query("SELECT * from IdeaCriteria",callback);
+    let res = db.query("SELECT * from IdeaCriteria  where phase = ?",[phase],callback);
 
     return res;
   },
@@ -52,7 +52,7 @@ var IdeaCriteria= {
       }
     });
 
-    let res = db.query("SELECT ic.name, ic.critID from IdeaCriteria ic  where ic.phase=? and ic.isActive = '1'",[phase],callback);
+    let res = db.query("SELECT ic.name, ic.critID, ic.isActive from IdeaCriteria ic  where ic.phase=? and ic.isActive = '1'",[phase],callback);
 
     return res;
   },
@@ -95,6 +95,7 @@ var IdeaCriteria= {
 
   updateCriteria: function(id,ideaCrit,callback){
 
+    console.log(ideaCrit);
 
     db.connect(function (err) {
       if(err) {console.log(err.code)
