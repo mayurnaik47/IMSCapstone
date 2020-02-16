@@ -15,18 +15,18 @@
           <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/evalphase1">Evaluation Ph-1</a>
+        <a class="nav-link" routerLinkActive="active"  *ngIf="userType===3 || userType===2" routerLink="/evalphase1">Evaluation Ph-1</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/rankingph1">Ranking Ph-1</a>
+        <a class="nav-link" routerLinkActive="active"  *ngIf="userType===3 || userType===2" routerLink="/rankingph1">Ranking Ph-1</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/evalphase2">Evaluation Ph-2</a>
+        <a class="nav-link" routerLinkActive="active"  *ngIf="userType===3 || userType===2" routerLink="/evalphase2">Evaluation Ph-2</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/rankingph2">Ranking Ph-2</a>
+        <a class="nav-link" routerLinkActive="active"  *ngIf="userType===3 || userType===2" routerLink="/rankingph2">Ranking Ph-2</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="userType===2" class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/admin">Admin</a>
       </li>
     </ul>

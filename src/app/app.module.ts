@@ -38,7 +38,7 @@ import {FileserviceService} from './services/fileservice.service';
 import { Idearankingph2Component } from './idearankingph2/idearankingph2.component';
 
 const appRoute: Routes = [
-  { path: 'login' , component : HomeComponent},
+  { path: 'login' , component : LoginComponent},
   { path: 'home' , component : HomeComponent},
   { path: 'evalphase1' , component : EvaluationComponent},
   { path: 'evalphase2' , component : Evaluationph2Component},

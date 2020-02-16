@@ -22,6 +22,7 @@ export class IdearankingComponent implements OnInit {
   ideasRejected: IdeaModel[];
   firstName: string;
   lastName: string;
+  userType: number;
 
   ideasSubmitted1: IdeaModel[];
   ideasSubmitted2: IdeaModel[];
@@ -36,6 +37,7 @@ export class IdearankingComponent implements OnInit {
   ngOnInit() {
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
 
     this.phase = new Phase();
     // tslint:disable-next-line:radix

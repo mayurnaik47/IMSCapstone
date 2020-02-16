@@ -17,6 +17,7 @@ export class Evaluationph2Component implements OnInit {
   firstName: string;
   lastName: string;
   phase: Phase;
+  userType: number;
   displayedColumns: string[] = ['ideaID', 'title', 'userName', 'statusID', 'Action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
@@ -34,6 +35,7 @@ export class Evaluationph2Component implements OnInit {
     this.phase.action = sessionStorage.getItem('phaseAction');
     // tslint:disable-next-line:radix
     this.evalUserID = parseInt(sessionStorage.getItem('usersID'));
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
     this.initEvalList();
   }
 

@@ -22,6 +22,8 @@ export class Idearankingph2Component implements OnInit {
   ideasRejected: IdeaModel[];
   firstName: string;
   lastName: string;
+  userType: number;
+
 
   ideasSubmitted1: IdeaModel[];
   ideasSubmitted2: IdeaModel[];
@@ -40,6 +42,7 @@ export class Idearankingph2Component implements OnInit {
     // tslint:disable-next-line:radix
     this.phase.phase = parseInt(sessionStorage.getItem('phaseID'));
     this.phase.action = sessionStorage.getItem('phaseAction');
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
 
     this.getDistinctEvaluationIdeas();
 

@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'IMSCapstone';
+  firstName: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private projService: ProjectService) {
 
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.navigate(['login']);
+    this.firstName = sessionStorage.getItem('fName');
   }
 
   changeStatusNav(event) {
@@ -26,6 +28,8 @@ export class AppComponent implements OnInit {
       }
       this.projService.checkIfLoggedIn();
     }
+
+    this.firstName = sessionStorage.getItem('fName');
   }
 
   logout() {

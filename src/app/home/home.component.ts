@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   firstName: string;
   lastName: string;
   userID: number;
+  userType: number;
   ideaSelected = false;
 
   batchVisible = false;
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
     this.userID = parseInt(sessionStorage.getItem('usersID'));
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
 
     // save phase details in session storage
     this.projService.getPhaseDetails().subscribe(

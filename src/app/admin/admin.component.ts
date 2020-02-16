@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
   updateCriteria: IdeaCriteria;
   newInsertCriteria: IdeaCriteria;
   criteriaPhase = 1;
+  userType: number;
 
   newIdeatype: IdeaType;
   delIdeatype: IdeaType;
@@ -51,6 +52,7 @@ export class AdminComponent implements OnInit {
     this.firstName = sessionStorage.getItem('fName');
     this.lastName = sessionStorage.getItem('lName');
     this.resetPhaseVar = new Phase();
+    this.userType = parseInt(sessionStorage.getItem('usersType'));
     this.getPhaseDetails();
     this.getAllIdeaTypes();
     this.getIdeasByPhase();

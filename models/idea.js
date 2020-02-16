@@ -42,7 +42,7 @@ var Idea= {
     return res;
   },
 
-
+// Service layer function having business logic to search the ideas based on filtered query and sort it based on user preferences.
   getIdeaBySearchQuery: function(searchQuery,callback){
 
     db.connect(function (err) {
@@ -56,7 +56,8 @@ var Idea= {
     searchQuery = '('+searchQuery+')';
 
     let res = db.query("SELECT ie.statusID, ie.typeID, ie.ideaID, ie.title, ie.description, ie.estTime, ie.cost, ie.docName,  " +
-      "ie.usersID, tp.name AS  typeName, st.name AS statusName from Idea ie LEFT OUTER JOIN Type tp USING(typeID) LEFT OUTER JOIN Status st USING(statusID) where ie.title REGEXP ?",[searchQuery],callback);
+      "ie.usersID, tp.name AS  typeName, st.name AS statusName from Idea ie LEFT OUTER JOIN Type tp USING(typeID) LEFT OUTER JOIN " +
+      "Status st USING(statusID) where ie.title REGEXP ?",[searchQuery],callback);
 
     return res;
   },
