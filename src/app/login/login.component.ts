@@ -23,6 +23,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  signInAsGuest() {
+    this.loggedIn = true;
+    sessionStorage.setItem('fName', 'Guest');
+    sessionStorage.setItem('usersType', '0');
+    sessionStorage.setItem('lName', '');
+    sessionStorage.setItem('loggedin', this.loggedIn.toString());
+    this.router.navigate(['home']);
+
+  }
+
   OnloggedIn() {
     if (!this.username) {
       this.usernameStatus = true;
@@ -42,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.users = users;
           console.log(this.users);
         },
-        error => console.log("Error: " + error),
+        error => console.log('Error: ' + error),
         () => {
           if (this.users != null) {
             if (

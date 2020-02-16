@@ -8,10 +8,10 @@
   <div class="navbar-collapse" id="navbarsExample03">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/">Home <span
+        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home">Home <span
             class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="userType!==0" class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/myideas">My Ideas</a>
       </li>
       <li *ngIf="userType===3 || userType===2" class="nav-item">
@@ -89,7 +89,7 @@
                 <input type="button" value="Show All" class="btn btn-block btn-lg btn-dark show-all"
                   (click)="processSearchQuery(query.value,true)">
               </div>
-              <div class="col-md-4">
+              <div *ngIf="userType!==0" class="col-md-4">
                 <input type="button" value="New Idea" class="btn btn-block btn-lg btn-success show-all"
                   (click)="insertNewidea()">
               </div>
