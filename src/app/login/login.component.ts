@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         },
         error => console.log('Error: ' + error),
         () => {
-          if (this.users != null) {
+          if (this.users[0] != null) {
             if (
               this.username === this.users[0].userName &&
               this.password === this.users[0].password

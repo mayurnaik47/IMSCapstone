@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IdeaModel, IdeaType, MaxID} from '../models/project.model';
 import {ProjectService} from '../services/project.service';
 import {max} from 'rxjs/operators';
+import {Location} from '@angular/common';
 
 
 
@@ -22,7 +23,7 @@ export class InsertupdateComponent implements OnInit {
   fieldsIsValid = false;
 
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService, private location: Location) { }
 
   ngOnInit() {
     this.newIdea = new IdeaModel();
@@ -87,6 +88,10 @@ export class InsertupdateComponent implements OnInit {
 
       }
 
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

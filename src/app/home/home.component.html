@@ -119,7 +119,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p *ngIf="alertIdeas && alertIdeas!==undefined && alertIdeas.length!==0">Following Ideas are selected for Phase 2 Evaluation : </p>
+        <p *ngIf="alertIdeas && alertIdeas!==undefined && alertIdeas.length!==0 && ideaSelected===false">Following Ideas are selected for Phase 2 Evaluation : </p>
         <p *ngIf="alertIdeas && alertIdeas!==undefined && alertIdeas.length!==0 && ideaSelected===true">Following Ideas are selected for Implementation : </p>
         <p *ngIf="alertIdeas && alertIdeas.length==0">Wait for further instructions</p>
 

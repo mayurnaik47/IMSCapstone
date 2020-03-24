@@ -3,6 +3,7 @@ import {IdeaModel, IdeaStatus, IdeaType} from '../models/project.model';
 import {ProjectService} from '../services/project.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-myideas',
@@ -20,7 +21,7 @@ export class MyideasComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private dataSource: MatTableDataSource<IdeaModel>;
 
-  constructor(private projService: ProjectService, private route: ActivatedRoute) {
+  constructor(private projService: ProjectService, private route: ActivatedRoute, private location: Location) {
 
   }
 
@@ -56,4 +57,7 @@ export class MyideasComponent implements OnInit {
 
   }
 
+  goBack() {
+    this.location.back();
+  }
 }
